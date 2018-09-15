@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_padding">4dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="btn_height">48dp</dimen>
+    <dimen name="border_button">24dp</dimen>
+
+    <!--Text-->
+    <dimen name="text_logo">48sp</dimen>
+</resources>

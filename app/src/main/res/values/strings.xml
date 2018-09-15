@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">YummyApp</string>
+    <string name="app_name_icon">YUMMY</string>
+    <string name="text_login">Log In</string>
+    <string name="text_username">USERNAME</string>
+    <string name="text_password">PASSWORD</string>
+    <string name="remember">REMEMBER</string>
+    <string name="forgot_password"><u>Forgot your password?</u></string>
 </resources>
