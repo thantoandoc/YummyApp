@@ -11,11 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText mUserName,mPassWord;
     Button  mLogin;
-    CheckBox mRemeber;
-    TextView mForgot;
+    CheckBox mRemember;
+    TextView mForgotPassword;
 
 
 
@@ -23,30 +23,39 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        vAnhXa();
-        mLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                xuLiSuKien();
-            }
-        });
+        mapViews();
+
+        handleEvents();
+
 
     }
 
-    private void xuLiSuKien() {
-        String  vUserName=mUserName.getText().toString();
-        String  vPassWord=mPassWord.getText().toString();
-        if(vUserName.equals(" ")||vPassWord.equals("")){
-            Toast.makeText(LoginActivity.this,"INPUT PLEASE", Toast.LENGTH_LONG).show();
+    private void handleEvents() {
+        mLogin.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_login:
+                loginEvent();
         }
     }
 
-    private void vAnhXa() {
+    private void loginEvent() {
+        String vUserName = mUserName.getText().toString();
+        String vPassWord = mPassWord.getText().toString();
+        if(vUserName.trim().equals("")||vPassWord.trim().equals("")){
+            Toast.makeText(LoginActivity.this,"input please!", Toast.LENGTH_SHORT).show();
+        }else {
+            // xu li
+        }
+    }
+    private void mapViews() {
         mUserName=(EditText)findViewById(R.id.edt_username);
         mPassWord=(EditText)findViewById(R.id.edt_password);
-        mLogin=(Button)findViewById(R.id.btn_login);
-        mRemeber=(CheckBox)findViewById(R.id.chk_remenber);
-        mForgot=(TextView)findViewById(R.id.txt_forgot);
+        mLogin = (Button)findViewById(R.id.btn_login);
+        mRemember=(CheckBox)findViewById(R.id.chk_remember);
+        mForgotPassword=(TextView)findViewById(R.id.txt_forgot_password);
     }
 }
