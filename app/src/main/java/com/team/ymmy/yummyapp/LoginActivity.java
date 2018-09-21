@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mUserName,mPassWord;
@@ -26,11 +27,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         handleEvents();
 
+
     }
 
     private void handleEvents() {
         mLogin.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -55,8 +58,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mForgotPassword=(TextView)findViewById(R.id.txt_forgot_password);
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
