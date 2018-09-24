@@ -8,36 +8,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.team.ymmy.model.Table;
+import com.team.ymmy.model.Catalog;
 import com.team.ymmy.yummyapp.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by Admin on 9/21/2018.
+ * Created by Admin on 9/22/2018.
  */
 
-public class TableAdapter extends BaseAdapter {
+public class CatalogAdapter extends BaseAdapter {
     private Context context;
     private   int resource;
-    private ArrayList<Table> arrayListTable;
+    private ArrayList<Catalog> arrayListCatalog;
 
-    public TableAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Table> arrayListTable) {
+    public CatalogAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Catalog> arrayListCatalog) {
         this.context = context;
         this.resource = resource;
-        this.arrayListTable = arrayListTable;
+        this.arrayListCatalog = arrayListCatalog;
     }
-
     @Override
     public int getCount() {
-        return arrayListTable.size();
+        return arrayListCatalog.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return arrayListTable.get(position);
+        return arrayListCatalog.get(position);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class TableAdapter extends BaseAdapter {
     }
 
     private class ViewHolder{
-        TextView txtTableID;
-        ImageView imgTableImage;
+        TextView txtCatalogName;
+        View imgCatalogImage;
         public ViewHolder(){}
     }
 
@@ -58,16 +58,16 @@ public class TableAdapter extends BaseAdapter {
         if(convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(this.resource, null);
-            holder.txtTableID = (TextView) convertView.findViewById(R.id.txt_table);
-            holder.imgTableImage = (ImageView) convertView.findViewById(R.id.img_table);
+            holder.txtCatalogName = (TextView) convertView.findViewById(R.id.txt_catalog_name);
+            holder.imgCatalogImage = (View) convertView.findViewById(R.id.img_catalog);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Table table = (Table) getItem(position);
-        holder.imgTableImage.setImageResource(table.getTableImage());
-        holder.txtTableID.setText(String.valueOf(table.getTableID()));
+        Catalog catalog = (Catalog) getItem(position);
+        holder.imgCatalogImage.setBackgroundResource(catalog.getHinh());
+        holder.txtCatalogName.setText(catalog.getTen());
 
         return convertView;
     }

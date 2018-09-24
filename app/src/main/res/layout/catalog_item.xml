@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/img_catalog"
+    android:layout_height="200dp"
+    android:background="@drawable/background"
+    >
+
+    <TextView
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:text="Ten"
+        android:id="@+id/txt_catalog_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

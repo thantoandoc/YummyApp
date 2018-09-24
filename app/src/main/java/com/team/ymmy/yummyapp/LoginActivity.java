@@ -1,5 +1,6 @@
 package com.team.ymmy.yummyapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -44,10 +45,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void loginEvent() {
         String vUserName = mUserName.getText().toString();
         String vPassWord = mPassWord.getText().toString();
-        if(vUserName.trim().equals("")||vPassWord.trim().equals("")){
+        if(!vUserName.trim().equals("")||!vPassWord.trim().equals("")){
             Toast.makeText(LoginActivity.this,"input please!", Toast.LENGTH_SHORT).show();
         }else {
-            // xu li
+            Intent intent = new Intent(LoginActivity.this, TableActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
     private void mapViews() {
