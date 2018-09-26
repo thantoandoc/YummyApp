@@ -1,5 +1,7 @@
 package com.team.ymmy.yummyapp;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,7 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class SideMenu extends AppCompatActivity {
+public class SideMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
@@ -28,22 +30,23 @@ public class SideMenu extends AppCompatActivity {
 
         mapViews();
         setupToolbar();
-        setupDrawerToogle();
+        setupDrawer();
     }
 
-    private void setupDrawerToogle() {
-//        ActionBarDrawerToggle mDrawerToogle = new ActionBarDrawerToggle(SideMenu.this, mDrawerLayout, mToolbar, R.string.closeDrawer, R.string.openDrawer);
-//        mDrawerLayout.addDrawerListener(mDrawerToogle);
-//        mDrawerToogle.syncState();
+    private void setupDrawer() {
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
+
+    @SuppressLint("ResourceAsColor")
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
-        ActionBar mActionBar =  getSupportActionBar();
+        ActionBar mActionBar = getSupportActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
-        mActionBar.setIcon(R.drawable.ic_arrow_back_24dp);
+        mToolbar.setTitle(R.string.app_name);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
     }
 
     private void mapViews() {
@@ -76,5 +79,20 @@ public class SideMenu extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.dangki : {
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                return true;
+            }
+            case R.id.dangnhap : {
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                return true;
+            }
+        }
+        return false;
     }
 }
