@@ -6,4 +6,7 @@
     <string name="text_password">PASSWORD</string>
     <string name="remember">REMEMBER</string>
     <string name="forgot_password"><u>Forgot your password?</u></string>
+    <string name="openDrawer">OpenDrawer</string>
+    <string name="closeDrawer">CloseDrawer</string>
+    <string name="action_categories">CATEGORIES</string>
 </resources>
