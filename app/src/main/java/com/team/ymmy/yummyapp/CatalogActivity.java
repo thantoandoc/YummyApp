@@ -1,8 +1,11 @@
 package com.team.ymmy.yummyapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,14 +20,26 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     private ListView lvDanhMucMonAn;
     private ArrayList<Catalog> mDanhMucMonAn;
     private CatalogAdapter catalogAdapter;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
         mapViews();
+        setupToolbar();
         setControls();
         handleEvents();
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(mToolbar);
+        ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mToolbar.setTitle(R.string.app_name);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
     }
 
     private void handleEvents() {
@@ -43,6 +58,10 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void mapViews() {
+        mToolbar = findViewById(R.id.toolbar_category);
+
+
+
         lvDanhMucMonAn = findViewById(R.id.lv_catalog);
         mDanhMucMonAn = new ArrayList<>();
         catalogAdapter = new CatalogAdapter(CatalogActivity.this, R.layout.item_category, mDanhMucMonAn);
@@ -53,5 +72,16 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(CatalogActivity.this, SideMenu.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home : {
+                onBackPressed();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
