@@ -1,20 +1,25 @@
 package com.team.ymmy.yummyapp;
 
-import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+
+import com.team.ymmy.fragments.AppetizersFragment;
+import com.team.ymmy.fragments.CheesesFragment;
+import com.team.ymmy.fragments.ColdStarterFragment;
+import com.team.ymmy.fragments.DessertsFragment;
+import com.team.ymmy.fragments.MainCoursesFragment;
+import com.team.ymmy.fragments.SoupsFragment;
 
 public class SideMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,7 +43,6 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
     }
 
 
-    @SuppressLint("ResourceAsColor")
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
         ActionBar mActionBar = getSupportActionBar();
@@ -82,17 +86,52 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected( MenuItem item) {
+        Fragment fragment;
         switch (item.getItemId()) {
-            case R.id.dangki : {
+            case R.id.action_cold_starter : {
+                fragment = new ColdStarterFragment();
+                changeFragment(fragment);
                 mDrawerLayout.closeDrawer(Gravity.RIGHT);
                 return true;
             }
-            case R.id.dangnhap : {
+            case R.id.action_appetizers : {
+                fragment = new AppetizersFragment();
+                changeFragment(fragment);
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                return true;
+            }
+            case R.id.action_soup : {
+                fragment = new SoupsFragment();
+                changeFragment(fragment);
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                return true;
+            }
+            case R.id.action_main_courses : {
+                fragment = new MainCoursesFragment();
+                changeFragment(fragment);
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                return true;
+            }
+            case R.id.action_cheese_biscuits : {
+                fragment = new CheesesFragment();
+                changeFragment(fragment);
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                return true;
+            }
+            case R.id.action_desserts : {
+                fragment = new DessertsFragment();
+                changeFragment(fragment);
                 mDrawerLayout.closeDrawer(Gravity.RIGHT);
                 return true;
             }
         }
         return false;
+    }
+    public void changeFragment(Fragment fragment){
+        FragmentManager mFragmentManager = getFragmentManager();
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.content_frame, fragment);
+        mFragmentTransaction.commit();
     }
 }

@@ -31,7 +31,7 @@ public class TableActivity extends AppCompatActivity implements AdapterView.OnIt
     private void mapViews() {
         gridTable = (GridView) findViewById(R.id.grid_table);
         arrayListTable = new ArrayList<>();
-        tableAdapter = new TableAdapter(TableActivity.this, R.layout.table_item, arrayListTable);
+        tableAdapter = new TableAdapter(TableActivity.this, R.layout.item_table, arrayListTable);
         gridTable.setAdapter(tableAdapter);
     }
 

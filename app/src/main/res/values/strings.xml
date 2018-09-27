@@ -9,4 +9,14 @@
     <string name="openDrawer">OpenDrawer</string>
     <string name="closeDrawer">CloseDrawer</string>
     <string name="action_categories">CATEGORIES</string>
+    <string name="action_cold_starter">COLD STARTER</string>
+    <string name="action_appetizers">APPETIZERS</string>
+    <string name="action_soup">SOUPS</string>
+    <string name="action_main_courses">MAIN COURSES</string>
+    <string name="action_cheese_biscuits">CHEESE &amp; BISCUITS</string>
+    <string name="action_desserts">DESSERTS</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:title="SIGN_UP_MENU"
+        <item android:title="@string/action_cold_starter"
             android:checked="true"
-            android:id="@+id/dangki"/>
-        <item android:title="SIGN_IN_MENU"
-            android:id="@+id/dangnhap"/>
+            android:id="@+id/action_cold_starter"/>
+        <item android:title="@string/action_appetizers"
+            android:id="@+id/action_appetizers"/>
+        <item android:id="@+id/action_soup"
+            android:title="@string/action_soup" />
+        <item android:title="@string/action_main_courses"
+            android:id="@+id/action_main_courses"/>
+        <item android:title="@string/action_cheese_biscuits"
+            android:id="@+id/action_cheese_biscuits"/>
+        <item android:title="@string/action_desserts"
+            android:id="@+id/action_desserts"/>
     </group>
 </menu>

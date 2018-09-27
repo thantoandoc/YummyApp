@@ -45,7 +45,7 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     private void mapViews() {
         lvDanhMucMonAn = findViewById(R.id.lv_catalog);
         mDanhMucMonAn = new ArrayList<>();
-        catalogAdapter = new CatalogAdapter(CatalogActivity.this, R.layout.catalog_item, mDanhMucMonAn);
+        catalogAdapter = new CatalogAdapter(CatalogActivity.this, R.layout.item_category, mDanhMucMonAn);
         lvDanhMucMonAn.setAdapter(catalogAdapter);
     }
 
