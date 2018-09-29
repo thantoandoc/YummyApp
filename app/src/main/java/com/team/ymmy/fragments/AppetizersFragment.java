@@ -9,28 +9,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.team.ymmy.adapters.DishAdapter;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
-import com.team.ymmy.yummyapp.SideMenu;
 
 import java.util.ArrayList;
 
-public class AppetizersFragment extends Fragment {
+public class AppetizersFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private GridView mAppetizersGrid;
     private ArrayList mDishArray;
     private DishAdapter mDishAdapter;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-
 
 
     @Override
@@ -39,8 +31,10 @@ public class AppetizersFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_appetizers, container, false);
         mapWidgets(rootView);
         initData();
+        handleEvents();
         return rootView;
     }
+
 
     private void initData() {
         mDishArray.add(new DishModel("A", R.drawable.background, "1"));
@@ -60,6 +54,12 @@ public class AppetizersFragment extends Fragment {
         mDishAdapter = new DishAdapter(getActivity(), R.layout.item_dish, mDishArray);
         mAppetizersGrid.setAdapter(mDishAdapter);
     }
+    private void handleEvents() {
+        mAppetizersGrid.setOnItemClickListener(this);
+    }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
 }

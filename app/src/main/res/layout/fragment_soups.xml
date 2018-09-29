@@ -4,10 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.team.ymmy.fragments.SoupsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <GridView
+        android:id="@+id/grid_soups"
+        android:stretchMode="columnWidth"
+        android:layout_gravity="center"
+        android:numColumns="auto_fit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/action_soup" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

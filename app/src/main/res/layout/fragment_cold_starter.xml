@@ -6,5 +6,12 @@
     tools:context="com.team.ymmy.fragments.ColdStarterFragment">
 
 
+    <GridView
+        android:id="@+id/grid_cold_start"
+        android:stretchMode="columnWidth"
+        android:layout_gravity="center"
+        android:numColumns="auto_fit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

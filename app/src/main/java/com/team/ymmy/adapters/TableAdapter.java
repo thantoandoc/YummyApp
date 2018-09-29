@@ -1,74 +1,72 @@
 package com.team.ymmy.adapters;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.team.ymmy.model.Table;
+import com.team.ymmy.yummyapp.CatalogActivity;
 import com.team.ymmy.yummyapp.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by Admin on 9/21/2018.
+ * Created by Admin on 9/29/2018.
  */
 
-public class TableAdapter extends BaseAdapter {
-    private Context context;
-    private   int resource;
-    private ArrayList<Table> arrayListTable;
-
-    public TableAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Table> arrayListTable) {
-        this.context = context;
-        this.resource = resource;
-        this.arrayListTable = arrayListTable;
+public class TableAdapter extends RecyclerView.Adapter <TableAdapter.ViewHolder> {
+    private Context mContext;
+    private int mResource;
+    private ArrayList<Table> mTables;
+    public TableAdapter(Context context, int resource, ArrayList<Table> tables){
+        this.mContext = context;
+        this.mResource = resource;
+        this.mTables = tables;
     }
 
     @Override
-    public int getCount() {
-        return arrayListTable.size();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View mRootView = LayoutInflater.from(parent.getContext()).inflate(mResource, parent, false);
+        ViewHolder mViewHolder = new ViewHolder(mRootView);
+        return mViewHolder;
     }
 
     @Override
-    public Object getItem(int position) {
-        return arrayListTable.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.imgTableImage.setImageResource(mTables.get(position).getTableImage());
+        holder.txtTableID.setText(String.valueOf(mTables.get(position).getTableID()));
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CatalogActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
+
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemCount() {
+        return mTables.size();
     }
 
-    private class ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
         TextView txtTableID;
         ImageView imgTableImage;
-        public ViewHolder(){}
-    }
+        RelativeLayout parentLayout;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-
-        if(convertView == null){
-            holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(this.resource, null);
-            holder.txtTableID = (TextView) convertView.findViewById(R.id.txt_table);
-            holder.imgTableImage = (ImageView) convertView.findViewById(R.id.img_table);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+        public ViewHolder(View itemView) {
+            super(itemView);
+            txtTableID = itemView.findViewById(R.id.txt_table);
+            imgTableImage = itemView.findViewById(R.id.img_table);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
-
-        Table table = (Table) getItem(position);
-        holder.imgTableImage.setImageResource(table.getTableImage());
-        holder.txtTableID.setText(String.valueOf(table.getTableID()));
-
-        return convertView;
     }
 }

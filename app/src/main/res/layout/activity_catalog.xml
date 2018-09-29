@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.team.ymmy.yummyapp.CatalogActivity">
     <android.support.v7.widget.Toolbar
+        app:titleTextColor="@color/white"
         android:id="@+id/toolbar_category"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
