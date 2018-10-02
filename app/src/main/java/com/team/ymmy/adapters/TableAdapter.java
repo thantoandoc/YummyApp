@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.team.ymmy.model.Table;
+import com.team.ymmy.model.Table_Demo;
 import com.team.ymmy.yummyapp.CatalogActivity;
 import com.team.ymmy.yummyapp.R;
 
@@ -39,8 +40,8 @@ public class TableAdapter extends RecyclerView.Adapter <TableAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.imgTableImage.setImageResource(mTables.get(position).getTableImage());
-        holder.txtTableID.setText(String.valueOf(mTables.get(position).getTableID()));
+        holder.imgTableImage.setImageResource(mTables.get(position).getImage());
+        holder.txtTableID.setText(String.valueOf(mTables.get(position).getID()));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

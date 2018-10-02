@@ -2,36 +2,44 @@ package com.team.ymmy.model;
 
 import java.io.Serializable;
 
+/**
+ * Created by Admin on 10/1/2018.
+ */
+
 public class Table implements Serializable {
-    private int mTableImage;
-    private int mTableID;
+    private int mID;
+    private boolean mStatus;
+    private ITable mTable;
 
-    public Table() {
+    public Table(int mID, boolean mStatus) {
+        this.mID = mID;
+        this.mStatus = mStatus;
+        if(mStatus) {
+            mTable = new TableHasCustomer();
+        } else {
+            mTable = new TableHasnotCustomer();
+        }
+
     }
 
-    public Table(int mTableID, int mTableImage) {
-        this.mTableImage = mTableImage;
-        this.mTableID = mTableID;
+    public int getID() {
+        return mID;
     }
 
-    public int getTableImage() {
-        return mTableImage;
+    public void setID(int mID) {
+        this.mID = mID;
     }
 
-    public void setTableImage(int mTableImage) {
-        this.mTableImage = mTableImage;
+    public int getImage() {
+        return mTable.getImage();
     }
 
-    public int getTableID() {
-        return mTableID;
-    }
-
-    public void setTableID(int mTableID) {
-        this.mTableID = mTableID;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
+    public void setStatus(boolean mStatus) {
+        this.mStatus = mStatus;
+        if(this.mStatus) {
+            mTable = new TableHasCustomer();
+        } else {
+            mTable = new TableHasnotCustomer();
+        }
     }
 }
