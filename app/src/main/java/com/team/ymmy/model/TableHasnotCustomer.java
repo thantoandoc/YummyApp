@@ -1,5 +1,6 @@
 package com.team.ymmy.model;
 
+import com.team.ymmy.interfaces.ITable;
 import com.team.ymmy.yummyapp.R;
 
 /**

@@ -1,37 +1,32 @@
 package com.team.ymmy.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
-import com.team.ymmy.adapters.DishAdapter;
+import com.team.ymmy.adapters.DishAdapterRecycler;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
 
 import java.util.ArrayList;
 
-public class AppetizersFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class AppetizersFragment extends Fragment {
 
-    private GridView mAppetizersGrid;
+    private RecyclerView mAppetizersGrid;
     private ArrayList mDishArray;
-    private DishAdapter mDishAdapter;
+    private DishAdapterRecycler mDishAdapter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_appetizers, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dish, container, false);
         mapWidgets(rootView);
         initData();
-        handleEvents();
         return rootView;
     }
 
@@ -49,17 +44,11 @@ public class AppetizersFragment extends Fragment implements AdapterView.OnItemCl
     }
 
     private void mapWidgets(View rootView) {
-        mAppetizersGrid = rootView.findViewById(R.id.grid_appetizers);
+        mAppetizersGrid = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
-        mDishAdapter = new DishAdapter(getActivity(), R.layout.item_dish, mDishArray);
+        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray);
         mAppetizersGrid.setAdapter(mDishAdapter);
-    }
-    private void handleEvents() {
-        mAppetizersGrid.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        RecyclerView.LayoutManager manager =  new GridLayoutManager(getActivity() , 2 );
+        mAppetizersGrid.setLayoutManager(manager);
     }
 }

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.team.ymmy.adapters.CatalogAdapter;
+import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.Catalog;
 
 import java.util.ArrayList;
@@ -47,21 +48,18 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void setControls() {
-        mDanhMucMonAn.add(new Catalog("Cold Starter",R.drawable.background));
-        mDanhMucMonAn.add(new Catalog("Appetizers",R.drawable.background));
-        mDanhMucMonAn.add(new Catalog("Soup",R.drawable.background));
-        mDanhMucMonAn.add(new Catalog("Main Course",R.drawable.background));
-        mDanhMucMonAn.add(new Catalog("Cheese & Biscuits",R.drawable.background));
-        mDanhMucMonAn.add(new Catalog("Dessert",R.drawable.background));
+        mDanhMucMonAn.add(new Catalog("Cold Starter",R.drawable.bg_starter));
+        mDanhMucMonAn.add(new Catalog("Appetizers",R.drawable.bg_appetizer));
+        mDanhMucMonAn.add(new Catalog("Soup",R.drawable.bg_soup));
+        mDanhMucMonAn.add(new Catalog("Main Course",R.drawable.bg_main_course));
+        mDanhMucMonAn.add(new Catalog("Cheese & Biscuits",R.drawable.bg_cheese));
+        mDanhMucMonAn.add(new Catalog("Dessert",R.drawable.bg_desserts));
 
         catalogAdapter.notifyDataSetChanged();
     }
 
     private void mapViews() {
         mToolbar = findViewById(R.id.toolbar_category);
-
-
-
         lvDanhMucMonAn = findViewById(R.id.lv_catalog);
         mDanhMucMonAn = new ArrayList<>();
         catalogAdapter = new CatalogAdapter(CatalogActivity.this, R.layout.item_category, mDanhMucMonAn);
@@ -70,7 +68,9 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
         Intent intent = new Intent(CatalogActivity.this, SideMenu.class);
+        intent.putExtra(Constant.POSITION_CATEGORY, Constant.CATEGORY_ID[position]);
         startActivity(intent);
     }
 

@@ -3,6 +3,7 @@ package com.team.ymmy.yummyapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.team.ymmy.constant.Constant;
 import com.team.ymmy.fragments.AppetizersFragment;
 import com.team.ymmy.fragments.CheesesFragment;
 import com.team.ymmy.fragments.ColdStarterFragment;
@@ -58,6 +60,41 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
         mToolbar = findViewById(R.id.toolbar);
         mFrameLayout = findViewById(R.id.content_frame);
         mNavigationView = findViewById(R.id.nav_view);
+
+        setDefaultItem();
+    }
+
+    private void setDefaultItem() {
+        Intent intent = getIntent();
+        int ID = intent.getIntExtra(Constant.POSITION_CATEGORY, R.id.action_cold_starter);
+        mNavigationView.setCheckedItem(ID);
+        Fragment fragment;
+        switch (ID){
+            case R.id.action_cold_starter:
+                fragment = new ColdStarterFragment();
+                changeFragment(fragment);
+                break;
+            case R.id.action_appetizers:
+                fragment = new AppetizersFragment();
+                changeFragment(fragment);
+                break;
+            case R.id.action_soup:
+                fragment = new SoupsFragment();
+                changeFragment(fragment);
+                break;
+            case R.id.action_main_courses:
+                fragment = new MainCoursesFragment();
+                changeFragment(fragment);
+                break;
+            case R.id.action_cheese_biscuits:
+                fragment = new CheesesFragment();
+                changeFragment(fragment);
+                break;
+            case R.id.action_desserts:
+                fragment = new DessertsFragment();
+                changeFragment(fragment);
+                break;
+        }
     }
 
     @Override
@@ -129,8 +166,7 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
         return false;
     }
     public void changeFragment(Fragment fragment){
-        FragmentManager mFragmentManager = getFragmentManager();
-        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        FragmentTransaction mFragmentTransaction = getFragmentManager().beginTransaction();
         mFragmentTransaction.replace(R.id.content_frame, fragment);
         mFragmentTransaction.commit();
     }

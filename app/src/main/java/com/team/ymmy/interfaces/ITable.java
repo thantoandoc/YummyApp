@@ -1,4 +1,4 @@
-package com.team.ymmy.model;
+package com.team.ymmy.interfaces;
 
 /**
  * Created by Admin on 10/1/2018.

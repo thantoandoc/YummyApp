@@ -33,7 +33,7 @@ public class TableAdapter extends RecyclerView.Adapter <TableAdapter.ViewHolder>
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mRootView = LayoutInflater.from(parent.getContext()).inflate(mResource, parent, false);
+        View mRootView = LayoutInflater.from(mContext).inflate(mResource, parent, false);
         ViewHolder mViewHolder = new ViewHolder(mRootView);
         return mViewHolder;
     }
@@ -61,7 +61,7 @@ public class TableAdapter extends RecyclerView.Adapter <TableAdapter.ViewHolder>
 
         TextView txtTableID;
         ImageView imgTableImage;
-        RelativeLayout parentLayout;
+        View parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
