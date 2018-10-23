@@ -2,8 +2,11 @@ package com.team.ymmy.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,9 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.team.ymmy.async.ImageAsync;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
 
@@ -36,11 +41,10 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mPrice.setText(mArray.get(position).getPrice());
-        holder.mImage.setImageResource(mArray.get(position).getImage());
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.mPrice.setText(String.valueOf(mArray.get(position).getPrice()));
         holder.mName.setText(mArray.get(position).getName());
-
+        new ImageAsync(mContext, holder.mImage).execute(mArray.get(position).getImage());
         int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8;
         int height =  mContext.getResources().getDisplayMetrics().widthPixels / 2;
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
@@ -50,13 +54,28 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
         holder.mParentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
                 View mRootView = LayoutInflater.from(mContext).inflate(R.layout.dialog_choose, null);
-
+                ImageView imgDish = mRootView.findViewById(R.id.img_dish_dialog);
+                TextView txt_Name = mRootView.findViewById(R.id.txt_dish_name_dialog);
+                TextView txt_Price = mRootView.findViewById(R.id.txt_dish_price_dialog);
                 Button mCancel = mRootView.findViewById(R.id.btn_cancel);
                 Button mOK = mRootView.findViewById(R.id.btn_ok);
+
+                new ImageAsync(mContext, imgDish).execute(mArray.get(holder.getAdapterPosition()).getImage());
+                txt_Name.setText(mArray.get(holder.getAdapterPosition()).getName());
+                txt_Price.setText(String.valueOf(mArray.get(holder.getAdapterPosition()).getPrice()));
+
+
                 mBuilder.setView(mRootView);
-                AlertDialog dialog = mBuilder.create();
+                final AlertDialog dialog = mBuilder.create();
+                mCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
                 dialog.show();
             }
         });

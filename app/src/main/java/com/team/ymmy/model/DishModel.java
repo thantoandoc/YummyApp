@@ -7,41 +7,51 @@ import java.io.Serializable;
  */
 
 public class DishModel implements Serializable {
-    private String mName;
-    private int mImage;
-    private String mPrice;
+    private int id;
+    private String name;
+    private String image;
+    private long price;
 
     public DishModel() {
     }
 
-    public DishModel(String mName, int mImage, String mPrice) {
-        this.mName = mName;
-        this.mImage = mImage;
-        this.mPrice = mPrice;
+    public DishModel(int ID, String mName, String mImage, long mPrice) {
+        this.id = ID;
+        this.name = mName;
+        this.image = mImage;
+        this.price = mPrice;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String mName) {
-        this.mName = mName;
+        this.name = mName;
     }
 
-    public int getImage() {
-        return mImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage(int mImage) {
-        this.mImage = mImage;
+    public void setImage(String mImage) {
+        this.image = mImage;
     }
 
-    public String getPrice() {
-        return mPrice;
+    public long getPrice() {
+        return price;
     }
 
-    public void setPrice(String mPrice) {
-        this.mPrice = mPrice;
+    public void setPrice(long mPrice) {
+        this.price = mPrice;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -29,13 +29,6 @@ public class SoupsFragment extends Fragment {
         return rootView;
     }
     private void initData() {
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
-        mDishArray.add(new DishModel("A", R.drawable.background, "1"));
 
         mDishAdapter.notifyDataSetChanged();
     }
