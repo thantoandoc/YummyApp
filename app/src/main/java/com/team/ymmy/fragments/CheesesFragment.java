@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.DishAdapterRecycler;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
@@ -21,6 +26,8 @@ public class CheesesFragment extends Fragment {
     private RecyclerView mCheesesGrid;
     private ArrayList mDishArray;
     private DishAdapterRecycler mDishAdapter;
+    private DatabaseReference mCheeseRef;
+    private FirebaseDatabase database;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,8 +39,22 @@ public class CheesesFragment extends Fragment {
     }
     private void initData() {
 
+        mCheeseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    DishModel dish = ds.getValue(DishModel.class);
+                    mDishArray.add(dish);
+                }
+                mDishAdapter.notifyDataSetChanged();
+            }
 
-        mDishAdapter.notifyDataSetChanged();
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void mapWidgets(View rootView) {
@@ -43,6 +64,9 @@ public class CheesesFragment extends Fragment {
         mCheesesGrid.setAdapter(mDishAdapter);
         RecyclerView.LayoutManager manager = new GridLayoutManager(getActivity(), 2);
         mCheesesGrid.setLayoutManager(manager);
+
+        database = FirebaseDatabase.getInstance();
+        mCheeseRef = database.getReference().child("DanhSachMonAn").child("Cheese_Biscuits");
     }
 
 
