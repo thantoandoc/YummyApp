@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.DishAdapterRecycler;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
@@ -19,6 +24,8 @@ public class AppetizersFragment extends Fragment {
     private RecyclerView mAppetizersGrid;
     private ArrayList mDishArray;
     private DishAdapterRecycler mDishAdapter;
+    private FirebaseDatabase database;
+    private DatabaseReference mAppetizerRef;
 
 
     @Override
@@ -32,7 +39,21 @@ public class AppetizersFragment extends Fragment {
 
 
     private void initData() {
-        mDishAdapter.notifyDataSetChanged();
+        mAppetizerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    DishModel dish = ds.getValue(DishModel.class);
+                    mDishArray.add(dish);
+                }
+                mDishAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void mapWidgets(View rootView) {
@@ -42,5 +63,9 @@ public class AppetizersFragment extends Fragment {
         mAppetizersGrid.setAdapter(mDishAdapter);
         RecyclerView.LayoutManager manager =  new GridLayoutManager(getActivity() , 2 );
         mAppetizersGrid.setLayoutManager(manager);
+
+        database = FirebaseDatabase.getInstance();
+        mAppetizerRef = database.getReference().child("DanhSachMonAn").child("Appetizers");
+
     }
 }
