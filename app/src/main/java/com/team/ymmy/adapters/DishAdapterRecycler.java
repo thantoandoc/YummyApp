@@ -76,6 +76,12 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
                         dialog.dismiss();
                     }
                 });
+                mOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
                 dialog.show();
             }
         });
