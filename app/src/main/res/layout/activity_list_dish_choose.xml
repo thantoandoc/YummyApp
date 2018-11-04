@@ -12,9 +12,21 @@
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
+
+    <Button
+        android:text="@string/app_name"
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
     <ListView
-        android:layout_below="@+id/toolbar_list_choose"
         android:id="@+id/lv_dish_choose"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_submit"
+        android:layout_below="@id/toolbar_list_choose"/>
+
+
+
 </RelativeLayout>
