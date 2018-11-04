@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.DishAdapterRecycler;
+import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
 
@@ -60,13 +61,13 @@ public class MainCoursesFragment extends Fragment {
     private void mapWidgets(View rootView) {
         mMainCourseGrid = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
-        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray);
+        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 4);
         mMainCourseGrid.setAdapter(mDishAdapter);
         RecyclerView.LayoutManager manager = new GridLayoutManager(getActivity(), 2);
         mMainCourseGrid.setLayoutManager(manager);
 
         database = FirebaseDatabase.getInstance();
-        mMainRef = database.getReference().child("DanhSachMonAn").child("Main_Courses");
+        mMainRef = database.getReference().child("DanhSachMonAn").child(Constant.TYPE[4]);
     }
 
 

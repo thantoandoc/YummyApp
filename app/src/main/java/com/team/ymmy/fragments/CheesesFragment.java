@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.DishAdapterRecycler;
+import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
 
@@ -28,6 +29,7 @@ public class CheesesFragment extends Fragment {
     private DishAdapterRecycler mDishAdapter;
     private DatabaseReference mCheeseRef;
     private FirebaseDatabase database;
+    private ArrayList<DishModel> mDSMonAn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,15 +62,13 @@ public class CheesesFragment extends Fragment {
     private void mapWidgets(View rootView) {
         mCheesesGrid = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
-        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray);
+        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 1);
         mCheesesGrid.setAdapter(mDishAdapter);
         RecyclerView.LayoutManager manager = new GridLayoutManager(getActivity(), 2);
         mCheesesGrid.setLayoutManager(manager);
 
         database = FirebaseDatabase.getInstance();
-        mCheeseRef = database.getReference().child("DanhSachMonAn").child("Cheese_Biscuits");
+        mCheeseRef = database.getReference().child("DanhSachMonAn").child(Constant.TYPE[1]);
     }
-
-
 
 }

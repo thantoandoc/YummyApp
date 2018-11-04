@@ -15,11 +15,14 @@ import android.widget.Toast;
 import com.team.ymmy.adapters.CatalogAdapter;
 import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.Catalog;
+import com.team.ymmy.model.DishChoose;
+import com.team.ymmy.model.DishModel;
 
 import java.util.ArrayList;
 
 public class CatalogActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    public static ArrayList<DishChoose> mDSMonAn;
     private ListView lvDanhMucMonAn;
     private ArrayList<Catalog> mDanhMucMonAn;
     private CatalogAdapter catalogAdapter;
@@ -73,11 +76,14 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
         mDanhMucMonAn = new ArrayList<>();
         catalogAdapter = new CatalogAdapter(CatalogActivity.this, R.layout.item_category, mDanhMucMonAn);
         lvDanhMucMonAn.setAdapter(catalogAdapter);
+        if( mDSMonAn == null){
+            mDSMonAn = new ArrayList<>();
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        invisibleFloatingButton();
         Intent intent = new Intent(CatalogActivity.this, SideMenu.class);
         intent.putExtra(Constant.POSITION_CATEGORY, Constant.CATEGORY_ID[position]);
         startActivity(intent);
@@ -87,6 +93,7 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home : {
+                mDSMonAn = null;
                 onBackPressed();
                 return true;
             }
@@ -107,10 +114,13 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
                 break;
             }
             case R.id.fab_list :{
-                Toast.makeText(this, "LIST", Toast.LENGTH_SHORT).show();
+                invisibleFloatingButton();
+                Intent intent = new Intent(CatalogActivity.this, ListDishChooseActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.fab_payment :{
+                invisibleFloatingButton();
                 Toast.makeText(this, "PAYMENT", Toast.LENGTH_SHORT).show();
                 break;
             }

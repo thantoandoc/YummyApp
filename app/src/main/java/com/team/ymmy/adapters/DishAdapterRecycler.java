@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.ymmy.async.ImageAsync;
+import com.team.ymmy.model.DishChoose;
 import com.team.ymmy.model.DishModel;
+import com.team.ymmy.yummyapp.CatalogActivity;
 import com.team.ymmy.yummyapp.R;
 
 import java.util.ArrayList;
@@ -26,11 +28,13 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
     private Context mContext;
     private int mResource;
     private ArrayList<DishModel> mArray;
+    private int TYPE;
 
-    public DishAdapterRecycler(Context mContext, int mResource, ArrayList<DishModel> mArray) {
+    public DishAdapterRecycler(Context mContext, int mResource, ArrayList<DishModel> mArray, int TYPE) {
         this.mContext = mContext;
         this.mResource = mResource;
         this.mArray = mArray;
+        this.TYPE = TYPE;
     }
 
     @Override
@@ -49,42 +53,6 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
         int height =  mContext.getResources().getDisplayMetrics().widthPixels / 2;
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
         holder.mParentLayout.setLayoutParams(layoutParams);
-
-
-        holder.mParentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
-                View mRootView = LayoutInflater.from(mContext).inflate(R.layout.dialog_choose, null);
-                ImageView imgDish = mRootView.findViewById(R.id.img_dish_dialog);
-                TextView txt_Name = mRootView.findViewById(R.id.txt_dish_name_dialog);
-                TextView txt_Price = mRootView.findViewById(R.id.txt_dish_price_dialog);
-                Button mCancel = mRootView.findViewById(R.id.btn_cancel);
-                Button mOK = mRootView.findViewById(R.id.btn_ok);
-
-                new ImageAsync(mContext, imgDish).execute(mArray.get(holder.getAdapterPosition()).getImage());
-                txt_Name.setText(mArray.get(holder.getAdapterPosition()).getName());
-                txt_Price.setText(String.valueOf(mArray.get(holder.getAdapterPosition()).getPrice()));
-
-
-                mBuilder.setView(mRootView);
-                final AlertDialog dialog = mBuilder.create();
-                mCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                mOK.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-                dialog.show();
-            }
-        });
     }
 
     @Override
@@ -99,10 +67,70 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
         private CardView mParentLayout;
         public ViewHolder(View itemView) {
             super(itemView);
+
             mImage = itemView.findViewById(R.id.img_dish);
             mName = itemView.findViewById(R.id.txt_dish_name);
             mPrice = itemView.findViewById(R.id.txt_dish_price);
             mParentLayout = itemView.findViewById(R.id.dish_layout);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+                    View mRootView = LayoutInflater.from(mContext).inflate(R.layout.dialog_choose, null);
+                    ImageView imgDish = mRootView.findViewById(R.id.img_dish_dialog);
+                    TextView txt_Name = mRootView.findViewById(R.id.txt_dish_name_dialog);
+                    TextView txt_Price = mRootView.findViewById(R.id.txt_dish_price_dialog);
+                    final TextView mAmounts = mRootView.findViewById(R.id.amounts);
+                    Button mCancel = mRootView.findViewById(R.id.btn_cancel);
+                    Button mOK = mRootView.findViewById(R.id.btn_ok);
+                    Button btn_Add = mRootView.findViewById(R.id.btn_add);
+                    Button btn_Sub = mRootView.findViewById(R.id.btn_sub);
+
+                    new ImageAsync(mContext, imgDish).execute(mArray.get(getAdapterPosition()).getImage());
+                    txt_Name.setText(mArray.get(getAdapterPosition()).getName());
+                    txt_Price.setText(String.valueOf(mArray.get(getAdapterPosition()).getPrice()));
+                    mAmounts.setText("1");
+
+                    mBuilder.setView(mRootView);
+
+                    final AlertDialog dialog = mBuilder.create();
+                    mCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    mOK.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int soLuong = Integer.parseInt(mAmounts.getText().toString());
+                            int ID = mArray.get(getAdapterPosition()).getId();
+                            int type = TYPE;
+                            CatalogActivity.mDSMonAn.add(new DishChoose(ID, soLuong, type));
+                            dialog.dismiss();
+                        }
+                    });
+                    btn_Add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int amounts = Integer.parseInt(mAmounts.getText().toString().trim());
+                            mAmounts.setText(String.valueOf(amounts + 1));
+                        }
+                    });
+                    btn_Sub.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int amounts = Integer.parseInt(mAmounts.getText().toString().trim());
+                            if(amounts > 1){
+                                mAmounts.setText(String.valueOf(amounts - 1));
+                            }
+                        }
+                    });
+
+                    dialog.show();
+                }
+            });
         }
     }
 }

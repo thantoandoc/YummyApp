@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.DishAdapterRecycler;
+import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
 
@@ -58,13 +59,13 @@ public class SoupsFragment extends Fragment {
     private void mapWidgets(View rootView) {
         mSoupGrid = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
-        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray);
+        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 5);
         mSoupGrid.setAdapter(mDishAdapter);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mSoupGrid.setLayoutManager(mLayoutManager);
 
         database = FirebaseDatabase.getInstance();
-        mSoupRef = database.getReference().child("DanhSachMonAn").child("Soups");
+        mSoupRef = database.getReference().child("DanhSachMonAn").child(Constant.TYPE[5]);
     }
 
 }
