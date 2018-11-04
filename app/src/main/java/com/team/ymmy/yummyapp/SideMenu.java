@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,12 +23,15 @@ import com.team.ymmy.fragments.ColdStarterFragment;
 import com.team.ymmy.fragments.DessertsFragment;
 import com.team.ymmy.fragments.MainCoursesFragment;
 import com.team.ymmy.fragments.SoupsFragment;
+import com.team.ymmy.model.DishModel;
+
+import java.util.ArrayList;
 
 public class SideMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
-    private FrameLayout mFrameLayout;
     private NavigationView mNavigationView;
 
     @Override
@@ -58,10 +62,10 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
     private void mapViews() {
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToolbar = findViewById(R.id.toolbar);
-        mFrameLayout = findViewById(R.id.content_frame);
         mNavigationView = findViewById(R.id.nav_view);
 
         setDefaultItem();
+
     }
 
     private void setDefaultItem() {
@@ -170,4 +174,7 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
         mFragmentTransaction.replace(R.id.content_frame, fragment);
         mFragmentTransaction.commit();
     }
+
+
+
 }

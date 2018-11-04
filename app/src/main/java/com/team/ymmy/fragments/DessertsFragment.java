@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.DishAdapterRecycler;
+import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.R;
 
@@ -59,13 +60,13 @@ public class DessertsFragment extends Fragment {
     private void mapWidgets(View rootView) {
         mDessertRecycleView = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
-        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray);
+        mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 3);
         mDessertRecycleView.setAdapter(mDishAdapter);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mDessertRecycleView.setLayoutManager(mLayoutManager);
 
         database = FirebaseDatabase.getInstance();
-        mDessertRef = database.getReference().child("DanhSachMonAn").child("Desserts");
+        mDessertRef = database.getReference().child("DanhSachMonAn").child(Constant.TYPE[3]);
     }
 
 

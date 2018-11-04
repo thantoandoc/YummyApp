@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team.ymmy.yummyapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".TableActivity" />
         <activity android:name=".CatalogActivity" />
-        <activity android:name=".SideMenu"></activity>
+        <activity android:name=".SideMenu" />
+        <activity android:name=".ListDishChooseActivity" />
+        <activity android:name=".CheckoutActivity"></activity>
     </application>
 
 </manifest>
