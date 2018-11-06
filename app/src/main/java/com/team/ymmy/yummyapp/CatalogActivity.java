@@ -16,13 +16,14 @@ import com.team.ymmy.adapters.CatalogAdapter;
 import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.Catalog;
 import com.team.ymmy.model.DishChoose;
+import com.team.ymmy.model.DishChooseModel;
 import com.team.ymmy.model.DishModel;
 
 import java.util.ArrayList;
 
 public class CatalogActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    public static ArrayList<DishChoose> mDSMonAn;
+    public static ArrayList<DishChooseModel> mDSMonAn;
     private ListView lvDanhMucMonAn;
     private ArrayList<Catalog> mDanhMucMonAn;
     private CatalogAdapter catalogAdapter;
@@ -93,7 +94,6 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home : {
-                mDSMonAn = null;
                 onBackPressed();
                 return true;
             }
