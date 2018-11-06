@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
 
-    <ListView
-        android:id="@+id/lv_dish_choose"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_dish_choose"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/btn_submit"

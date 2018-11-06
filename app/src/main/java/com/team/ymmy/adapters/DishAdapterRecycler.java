@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.team.ymmy.async.ImageAsync;
 import com.team.ymmy.model.DishChoose;
+import com.team.ymmy.model.DishChooseModel;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.CatalogActivity;
 import com.team.ymmy.yummyapp.R;
@@ -107,7 +108,7 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
                             int soLuong = Integer.parseInt(mAmounts.getText().toString());
                             int ID = mArray.get(getAdapterPosition()).getId();
                             int type = TYPE;
-                            CatalogActivity.mDSMonAn.add(new DishChoose(ID, soLuong, type));
+                            CatalogActivity.mDSMonAn.add(new DishChooseModel(mArray.get(getAdapterPosition()), soLuong));
                             dialog.dismiss();
                         }
                     });
