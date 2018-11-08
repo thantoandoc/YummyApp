@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.team.ymmy.async.ImageAsync;
 import com.team.ymmy.model.DishChoose;
 import com.team.ymmy.model.DishChooseModel;
@@ -49,7 +50,7 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mPrice.setText(String.valueOf(mArray.get(position).getPrice()));
         holder.mName.setText(mArray.get(position).getName());
-        new ImageAsync(mContext, holder.mImage).execute(mArray.get(position).getImage());
+        Picasso.with(mContext).load(mArray.get(position).getImage()).into(holder.mImage);
         int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8;
         int height =  mContext.getResources().getDisplayMetrics().widthPixels / 2;
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
@@ -88,7 +89,7 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
                     Button btn_Add = mRootView.findViewById(R.id.btn_add);
                     Button btn_Sub = mRootView.findViewById(R.id.btn_sub);
 
-                    new ImageAsync(mContext, imgDish).execute(mArray.get(getAdapterPosition()).getImage());
+                    Picasso.with(mContext).load(mArray.get(getAdapterPosition()).getImage()).into(imgDish);
                     txt_Name.setText(mArray.get(getAdapterPosition()).getName());
                     txt_Price.setText(String.valueOf(mArray.get(getAdapterPosition()).getPrice()));
                     mAmounts.setText("1");

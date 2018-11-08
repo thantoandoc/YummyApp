@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.team.ymmy.async.ImageAsync;
 import com.team.ymmy.model.DishChoose;
 import com.team.ymmy.model.DishChooseModel;
@@ -37,7 +38,7 @@ public class DishChooseAdapter extends RecyclerView.Adapter<DishChooseAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mPrice.setText(String.valueOf(mArrayDish.get(position).getPrice()));
         holder.mName.setText(mArrayDish.get(position).getName());
-        new ImageAsync(mContext, holder.mImage).execute(mArrayDish.get(position).getImage());
+        Picasso.with(mContext).load(mArrayDish.get(position).getImage()).into(holder.mImage);
         holder.counter.setText(String.valueOf(mArrayDish.get(position).getCounter()));
     }
 
