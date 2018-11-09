@@ -142,7 +142,9 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
             }
             case R.id.fab_payment :{
                 invisibleFloatingButton();
-                Toast.makeText(this, "PAYMENT", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CatalogActivity.this, CheckoutActivity.class);
+                intent.putExtra(Constant.TABLE_NAME, iTABLE);
+                startActivity(intent);
                 break;
             }
         }

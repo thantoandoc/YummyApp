@@ -12,9 +12,21 @@
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
-    <ListView
-        android:layout_below="@+id/toolbar_checkout"
-        android:id="@+id/lv_dish_choose"
+
+    <Button
+        android:text="@string/app_name"
+        android:id="@+id/btn_checkout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_dish_for_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_checkout"
+        android:layout_below="@id/toolbar_checkout"/>
+
+
+
 </RelativeLayout>

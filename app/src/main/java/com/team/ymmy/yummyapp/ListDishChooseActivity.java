@@ -29,6 +29,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
     private RecyclerView mRecyclerDish;
     private Button btn_submit;
     private DishChooseAdapter adapter;
+    private ArrayList<DishChooseModel> arrayList;
     private int table_order;
 
     private DatabaseReference database;
@@ -51,21 +52,21 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         table_order = intent.getIntExtra(Constant.TABLE_NAME, 0);
         mToolbar = findViewById(R.id.toolbar_list_choose);
         mRecyclerDish = findViewById(R.id.recycler_dish_choose);
+        arrayList = new ArrayList<>();
         btn_submit = findViewById(R.id.btn_submit);
-        adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, CatalogActivity.mDSMonAn);
+        adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList);
         mRecyclerDish.setAdapter(adapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerDish.setLayoutManager(mLayoutManager);
 
         database = FirebaseDatabase.getInstance().getReference();
 
-        if(CatalogActivity.mDSMonAn.size() == 0){
-            getDatas();
-        }
+        getDatas();
 }
 
     private void getDatas() {
         database.child("DishChoose").child("ban_" +(table_order  + 1)).addValueEventListener(this);
+
     }
 
 
@@ -95,7 +96,6 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         switch (v.getId()){
             case R.id.btn_submit:{
                 pushDataToFirebase();
-                CatalogActivity.mDSMonAn = new ArrayList<>();
                 finish();
                 return;
             }
@@ -107,19 +107,29 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         for (int i = 0; i < CatalogActivity.mDSMonAn.size(); i++){
             database.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).push().setValue(CatalogActivity.mDSMonAn.get(i));
         }
+        CatalogActivity.mDSMonAn.clear();
     }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            DishChooseModel dish = ds.getValue(DishChooseModel.class);
-            CatalogActivity.mDSMonAn.add(dish);
+        if(arrayList.size() == 0){
+            if (CatalogActivity.mDSMonAn.size() > 0){
+                for (DishChooseModel dish : CatalogActivity.mDSMonAn){
+                    arrayList.add(dish);
+                }
+            }
+            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                DishChooseModel dish = ds.getValue(DishChooseModel.class);
+                arrayList.add(dish);
+            }
+
+            adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onCancelled(DatabaseError databaseError) {
 
     }
+
 }
