@@ -1,10 +1,16 @@
 package com.team.ymmy.yummyapp;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +24,7 @@ import java.util.ArrayList;
 public class TableActivity extends AppCompatActivity {
 
     private ArrayList<Table> mTableList;
+    private Toolbar mToolbar;
     private TableAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private FirebaseDatabase database;
@@ -28,12 +35,17 @@ public class TableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_table);
 
         mapViews();
+        setupToolbar();
         setControls();
     }
 
 
-
+    private void setupToolbar() {
+        setSupportActionBar(mToolbar);
+        mToolbar.setTitle("Table List");
+    }
     private void mapViews() {
+        mToolbar = findViewById(R.id.toolbar_table);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_grid_table);
         mTableList = new ArrayList<>();
         mAdapter = new TableAdapter(TableActivity.this, R.layout.item_table, mTableList);
@@ -45,6 +57,23 @@ public class TableActivity extends AppCompatActivity {
         mTableListRef = database.getReference().child("danhsachbanan");
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.config_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_sign_out:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void setControls() {
         mTableListRef.addValueEventListener(new ValueEventListener() {
