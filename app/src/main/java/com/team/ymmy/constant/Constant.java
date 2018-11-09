@@ -12,4 +12,6 @@ public class Constant {
                                         R.id.action_main_courses, R.id.action_cheese_biscuits, R.id.action_desserts};
 
     public static String [] TYPE = {"Appetizers", "Cheese_Biscuits", "Cold_Starters", "Desserts", "Main_Courses", "Soups"};
+    public static String DISHCHOOSE = "DishChoose";
+    public static String TABLE_NAME = "TABLE_NAME";
 }

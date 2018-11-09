@@ -50,6 +50,7 @@ public class TableActivity extends AppCompatActivity {
         mTableListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mTableList.clear();
                 for( DataSnapshot ds: dataSnapshot.getChildren()) {
                     Table table = ds.getValue(Table.class);
                     mTableList.add(table);

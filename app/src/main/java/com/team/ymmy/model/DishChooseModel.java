@@ -2,6 +2,9 @@ package com.team.ymmy.model;
 
 public class DishChooseModel extends DishModel {
     private int counter;
+    public DishChooseModel(){
+        super();
+    }
     public DishChooseModel(DishModel d, int counter){
         super(d.getId(), d.getName(), d.getImage(), d.getPrice());
         this.counter = counter;

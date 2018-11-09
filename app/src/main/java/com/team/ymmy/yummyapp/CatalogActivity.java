@@ -1,8 +1,10 @@
 package com.team.ymmy.yummyapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +32,7 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     private Toolbar mToolbar;
     private FloatingActionButton fab, fab_list, fab_payment;
     private boolean isCheck = false;
+    private int iTABLE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,8 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void mapViews() {
+        Intent intent = getIntent();
+        iTABLE = intent.getIntExtra(Constant.TABLE_NAME, 0);
         mToolbar = findViewById(R.id.toolbar_category);
         lvDanhMucMonAn = findViewById(R.id.lv_catalog);
         fab = findViewById(R.id.fab);
@@ -94,7 +99,22 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home : {
-                onBackPressed();
+                if( mDSMonAn.size() != 0 ){
+                    new AlertDialog.Builder(this)
+                            .setMessage("Are you sure you want to cancel order ?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mDSMonAn = null;
+                                    onBackPressed();
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+
+                }else{
+                    onBackPressed();
+                }
                 return true;
             }
         }
@@ -116,6 +136,7 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
             case R.id.fab_list :{
                 invisibleFloatingButton();
                 Intent intent = new Intent(CatalogActivity.this, ListDishChooseActivity.class);
+                intent.putExtra(Constant.TABLE_NAME, iTABLE);
                 startActivity(intent);
                 break;
             }
