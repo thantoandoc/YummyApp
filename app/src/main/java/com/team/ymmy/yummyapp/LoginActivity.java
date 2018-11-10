@@ -2,6 +2,7 @@ package com.team.ymmy.yummyapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.PatternMatcher;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
+    private ProgressBar progressBar;
 
     private static final String USERNAME = "USERNAME";
     private static final String PASSWORD = "PASSWORD";
@@ -101,6 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mEditor.putBoolean(CHECKBOX_STATE, mRemember.isChecked());
             mEditor.commit();
         }
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(userName, passWord).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -108,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     FirebaseUser user = mAuth.getCurrentUser();
                     Toast.makeText(LoginActivity.this, "Login success!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, TableActivity.class);
+                    progressBar.setVisibility(View.INVISIBLE);
                     startActivity(intent);
                     finish();
                 } else {
@@ -133,6 +138,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLogin = (Button)findViewById(R.id.btn_login);
         mRemember=(CheckBox)findViewById(R.id.chk_remember);
         mForgotPassword=(TextView)findViewById(R.id.txt_forgot_password);
+
+        progressBar = findViewById(R.id.progressbar_login);
+        progressBar.getIndeterminateDrawable().setColorFilter(0xf3bfedff, PorterDuff.Mode.SRC_ATOP);
 
         mAuth = FirebaseAuth.getInstance();
     }

@@ -6,7 +6,7 @@
                 android:radius="@dimen/border_button"
                 />
             <solid
-                android:color="@color/color_btn_login"/>
+                android:color="@color/wrapper_input"/>
         </shape>
     </item>
     <item android:state_pressed="true">

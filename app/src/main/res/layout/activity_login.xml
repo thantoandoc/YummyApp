@@ -39,13 +39,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
-        android:layout_marginHorizontal="@dimen/activity_margin"
+        android:layout_marginRight="@dimen/activity_margin"
+        android:layout_marginLeft="@dimen/activity_margin"
         android:orientation="vertical">
 
         <LinearLayout
             android:padding="@dimen/activity_padding"
             android:gravity="center"
             android:layout_width="match_parent"
+            android:background="@color/wrapper_input"
             android:layout_height="wrap_content">
             <ImageView
                 android:padding="@dimen/activity_padding"
@@ -67,6 +69,8 @@
         <LinearLayout
             android:padding="@dimen/activity_padding"
             android:gravity="center"
+            android:background="@color/wrapper_input"
+            android:layout_marginTop="@dimen/activity_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -86,7 +90,8 @@
                 android:singleLine="true"/>
         </LinearLayout>
         <Button
-            android:layout_margin="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginBottom="@dimen/activity_margin"
             android:id="@+id/btn_login"
             android:layout_gravity="center"
             android:text="@string/text_login"
@@ -120,5 +125,15 @@
                 android:textColor="@color/white" />
         </RelativeLayout>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar_login"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

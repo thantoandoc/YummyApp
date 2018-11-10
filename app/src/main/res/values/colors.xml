@@ -10,6 +10,8 @@
     <color name="bg_color_dish">#99000000</color>
     <color name="color_text">#f31bc031</color>
     <color name="color_btn_choose">#f363bee2</color>
+    <color name="color_btn_choose_light">#f3bfedff</color>
     <color name="color_red_yellow">#FF8870</color>
     <color name="color_green_light">#7CFF94</color>
+    <color name="wrapper_input">#99000000</color>
 </resources>
