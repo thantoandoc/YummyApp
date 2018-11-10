@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.team.ymmy.model.Catalog;
@@ -47,7 +46,7 @@ public class CatalogAdapter extends BaseAdapter {
 
     private class ViewHolder{
         TextView txtCatalogName;
-        View imgCatalogImage;
+        ImageView imgCatalogImage;
         public ViewHolder(){}
     }
 
@@ -59,7 +58,7 @@ public class CatalogAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(this.resource, null);
             holder.txtCatalogName = (TextView) convertView.findViewById(R.id.txt_catalog_name);
-            holder.imgCatalogImage = (View) convertView.findViewById(R.id.img_catalog);
+            holder.imgCatalogImage = (ImageView) convertView.findViewById(R.id.img_catalog);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

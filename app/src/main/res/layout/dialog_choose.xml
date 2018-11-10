@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
-    <TextView
-        android:gravity="center"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/action_cold_starter"/>
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:padding="@dimen/activity_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_dish_dialog"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:layout_below="@id/img_dish_dialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_dish_name_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food Name"
+                android:textSize="25sp"
+                />
+
+            <TextView
+                android:id="@+id/txt_dish_price_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60000VND"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
+        android:padding="@dimen/activity_padding"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_sub"
+            android:text="-"
+            android:gravity="center"
+            android:layout_width="42dp"
+            android:layout_height="42dp" />
+        <TextView
+            android:id="@+id/amounts"
+            android:textSize="25sp"
+            android:text="1"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/btn_add"
+            android:text="+"
+            android:gravity="center"
+            android:layout_width="42dp"
+            android:layout_height="42dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:padding="@dimen/activity_padding"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

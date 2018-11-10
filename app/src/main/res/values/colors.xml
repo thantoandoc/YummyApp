@@ -6,4 +6,5 @@
     <color name="backgroundColor">#7F7F7F</color>
     <color name="white">#ffffff</color>
     <color name="color_btn_login">#6C6661</color>
+    <color name="bg_color_recycle">#E8E8E8</color>
 </resources>
