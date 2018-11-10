@@ -14,12 +14,13 @@
         android:layout_height="?attr/actionBarSize"/>
 
     <Button
-        android:text="@string/app_name"
+        android:text="@string/action_checkout"
+        android:background="@drawable/border_choose_dish_btn"
         android:id="@+id/btn_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
-
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_dish_for_checkout"
         android:layout_width="match_parent"

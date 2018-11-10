@@ -4,6 +4,14 @@
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="btn_height">48dp</dimen>
     <dimen name="border_button">24dp</dimen>
+    <dimen name="text_size_name">25sp</dimen>
+    <dimen name="text_size_cost">18sp</dimen>
+
+    <dimen name="border_dish">10dp</dimen>
+    <dimen name="item_dish">200dp</dimen>
+    <dimen name="item_dish2">100dp</dimen>
+    <dimen name="item_dish_choose">128dp</dimen>
+
 
     <!--Text-->
     <dimen name="text_logo">48sp</dimen>

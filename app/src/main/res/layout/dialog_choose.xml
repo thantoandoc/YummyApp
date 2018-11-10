@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/round_outline">
     <RelativeLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/activity_margin"
         android:padding="@dimen/activity_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/img_dish_dialog"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true" />
 
+        <ImageView
+            android:src="@drawable/background"
+            android:id="@+id/img_dish_dialog"
+            android:layout_width="@dimen/item_dish2"
+            android:layout_height="@dimen/item_dish2"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_padding"
+            />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_below="@id/img_dish_dialog"
             android:orientation="vertical">
@@ -27,60 +33,94 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Food Name"
-                android:textSize="25sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_name"
                 />
-
             <TextView
                 android:id="@+id/txt_dish_price_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="60000VND"
-                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:text="60000 VND"
+                android:textSize="@dimen/text_size_cost"
+
                 />
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
-        android:padding="@dimen/activity_padding"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_sub"
-            android:text="-"
-            android:gravity="center"
-            android:layout_width="42dp"
-            android:layout_height="42dp" />
-        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_sub"
+                android:layout_width="@dimen/btn_height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_margin"
+                android:background="@drawable/round_outline"
+                android:text="@string/action_sub"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_name"
+                android:textStyle="bold" />
+
+            <TextView
             android:id="@+id/amounts"
-            android:textSize="25sp"
+            android:textSize="@dimen/text_size_name"
+                android:textColor="@color/colorPrimary"
             android:text="1"
             android:gravity="center"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/btn_height"
             android:layout_height="match_parent" />
-        <Button
-            android:id="@+id/btn_add"
-            android:text="+"
-            android:gravity="center"
-            android:layout_width="42dp"
-            android:layout_height="42dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:padding="@dimen/activity_padding"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btn_cancel"
-            android:text="Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="@dimen/btn_height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_margin"
+                android:background="@drawable/round_outline"
+                android:text="@string/action_add"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_name"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Button
-            android:layout_weight="1"
             android:id="@+id/btn_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK" />
+            android:layout_margin="@dimen/activity_margin"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:background="@drawable/btn_border_green"
+            android:text="@string/action_ok"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_name"
+            />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_margin="@dimen/activity_margin"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:background="@drawable/btn_border_red"
+            android:textColor="@color/white"
+            android:text="@string/action_cancel"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_name"/>
+
+
     </LinearLayout>
 </LinearLayout>

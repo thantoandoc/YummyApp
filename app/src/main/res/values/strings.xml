@@ -15,7 +15,12 @@
     <string name="action_main_courses">MAIN COURSES</string>
     <string name="action_cheese_biscuits">CHEESE &amp; BISCUITS</string>
     <string name="action_desserts">DESSERTS</string>
-
+    <string name="action_checkout">THANH TOÁN</string>
+    <string name="action_order">ĐẶT MÓN</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">CANCEL</string>
+    <string name="action_add">+</string>
+    <string name="action_sub">-</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
