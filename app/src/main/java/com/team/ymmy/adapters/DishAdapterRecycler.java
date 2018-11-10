@@ -1,9 +1,9 @@
 package com.team.ymmy.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -78,7 +78,7 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext, R.style.DialogTransparentStyle);
                     View mRootView = LayoutInflater.from(mContext).inflate(R.layout.dialog_choose, null);
                     ImageView imgDish = mRootView.findViewById(R.id.img_dish_dialog);
                     TextView txt_Name = mRootView.findViewById(R.id.txt_dish_name_dialog);

@@ -21,13 +21,13 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:layout_margin="@dimen/activity_padding"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/booklet"
-        app:fabSize="auto"
+        app:fabSize="normal"
     />
     <include layout="@layout/floating_button_category"/>
 </RelativeLayout>

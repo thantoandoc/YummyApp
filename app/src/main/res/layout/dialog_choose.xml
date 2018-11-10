@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/round_outline">
+    android:background="@drawable/dialog_round">
     <RelativeLayout
         android:layout_marginTop="@dimen/activity_margin"
         android:padding="@dimen/activity_padding"
@@ -15,8 +15,8 @@
         <ImageView
             android:src="@drawable/background"
             android:id="@+id/img_dish_dialog"
-            android:layout_width="@dimen/item_dish2"
-            android:layout_height="@dimen/item_dish2"
+            android:layout_width="@dimen/item_dish_choose"
+            android:layout_height="@dimen/item_dish_choose"
             android:scaleType="centerCrop"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_padding"

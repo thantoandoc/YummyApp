@@ -3,12 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="backgroundColor">#7F7F7F</color>
+    <color name="backgroundColor">#337F7F7F</color>
     <color name="white">#ffffff</color>
-    <color name="color_btn_login">#6C6661</color>
+    <color name="color_btn_login">#CC6C6661</color>
     <color name="bg_color_recycle">#E8E8E8</color>
     <color name="bg_color_dish">#99000000</color>
     <color name="color_text">#f31bc031</color>
     <color name="color_btn_choose">#f363bee2</color>
-
+    <color name="color_red_yellow">#FF8870</color>
+    <color name="color_green_light">#7CFF94</color>
 </resources>

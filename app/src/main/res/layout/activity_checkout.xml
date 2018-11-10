@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color_recycle"
     tools:context="com.team.ymmy.yummyapp.CatalogActivity">
     <android.support.v7.widget.Toolbar
         app:titleTextColor="@color/white"
@@ -20,8 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/activity_padding"
         android:textColor="@color/white"/>
     <android.support.v7.widget.RecyclerView
+
         android:id="@+id/recycler_dish_for_checkout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

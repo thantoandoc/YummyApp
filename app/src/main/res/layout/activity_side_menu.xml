@@ -25,7 +25,7 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_cold_starter"></fragment>
+            tools:layout="@layout/fragment_dish"></fragment>
     </LinearLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

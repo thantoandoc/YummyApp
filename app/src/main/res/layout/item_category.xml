@@ -10,7 +10,7 @@
         <ImageView
             android:id="@+id/img_catalog"
             android:layout_width="match_parent"
-            android:layout_height="180dp" />
+            android:layout_height="@dimen/item_dish" />
         <TextView
             android:textStyle="bold"
             android:textAllCaps="true"
