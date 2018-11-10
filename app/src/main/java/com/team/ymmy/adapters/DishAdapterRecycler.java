@@ -107,8 +107,6 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
                         @Override
                         public void onClick(View v) {
                             int soLuong = Integer.parseInt(mAmounts.getText().toString());
-                            int ID = mArray.get(getAdapterPosition()).getId();
-                            int type = TYPE;
                             CatalogActivity.mDSMonAn.add(new DishChooseModel(mArray.get(getAdapterPosition()), soLuong));
                             dialog.dismiss();
                         }

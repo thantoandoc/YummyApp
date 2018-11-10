@@ -21,6 +21,8 @@
     <string name="action_cancel">CANCEL</string>
     <string name="action_add">+</string>
     <string name="action_sub">-</string>
+    <string name="total_price">TOTAL : </string>
+    <string name="get_bill">GET BILL</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

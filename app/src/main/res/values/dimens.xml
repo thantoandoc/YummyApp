@@ -6,14 +6,13 @@
     <dimen name="marginRight_floating_button">90dp</dimen>
     <dimen name="btn_height">48dp</dimen>
     <dimen name="border_button">24dp</dimen>
-    <dimen name="text_size_name">25sp</dimen>
-    <dimen name="text_size_cost">18sp</dimen>
+    <dimen name="text_size_name">23sp</dimen>
+    <dimen name="text_size_cost">16sp</dimen>
 
     <dimen name="border_dish">10dp</dimen>
     <dimen name="item_dish">200dp</dimen>
     <dimen name="item_dish_height">250dp</dimen>
     <dimen name="item_dish_choose">128dp</dimen>
-    
 
     <!--Text-->
     <dimen name="text_logo">48sp</dimen>

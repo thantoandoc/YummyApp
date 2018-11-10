@@ -12,23 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_dish_choose">
 
-
-            <ImageView
-                android:id="@+id/img_dish_choose"
-                android:layout_width="@dimen/item_dish_choose"
-                android:layout_height="@dimen/item_dish_choose"
-                android:src="@drawable/bg_soup"
-                android:padding="@dimen/activity_padding"/>
-
-
         <LinearLayout
+            android:layout_toLeftOf="@id/layout_amounts"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_toRightOf="@id/img_dish_choose"
-            android:layout_toLeftOf="@id/layout_amounts"
+            android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/activity_padding">
+            android:orientation="vertical"
+            android:paddingRight="@dimen/activity_padding"
+            android:paddingLeft="@dimen/activity_padding">
 
             <TextView
                 android:id="@+id/name_dish_choose"
@@ -49,7 +41,8 @@
             android:id="@+id/layout_amounts"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/activity_padding"
+            android:paddingRight="@dimen/activity_padding"
+            android:paddingLeft="@dimen/activity_padding"
             android:layout_marginRight="@dimen/activity_padding"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
