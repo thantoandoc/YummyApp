@@ -122,6 +122,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
             }
             for(DataSnapshot ds : dataSnapshot.getChildren()){
                 DishChooseModel dish = ds.getValue(DishChooseModel.class);
+                System.out.println(ds.getKey());
                 arrayList.add(dish);
             }
 

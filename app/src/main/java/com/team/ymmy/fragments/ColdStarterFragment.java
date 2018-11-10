@@ -47,7 +47,6 @@ public class ColdStarterFragment extends Fragment{
                 for( DataSnapshot ds: dataSnapshot.getChildren()) {
                     DishModel dish = ds.getValue(DishModel.class);
                     mDishArray.add(dish);
-                    Log.d("AAAAAAAAAAAAA", "onDataChange: " + dish);
                 }
                 progressBar.setVisibility(View.INVISIBLE);
                 mDishAdapter.notifyDataSetChanged();

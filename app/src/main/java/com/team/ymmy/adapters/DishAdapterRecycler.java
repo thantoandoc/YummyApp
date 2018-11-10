@@ -1,12 +1,12 @@
 package com.team.ymmy.adapters;
 
+import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.team.ymmy.async.ImageAsync;
-import com.team.ymmy.model.DishChoose;
 import com.team.ymmy.model.DishChooseModel;
 import com.team.ymmy.model.DishModel;
 import com.team.ymmy.yummyapp.CatalogActivity;
@@ -50,9 +49,12 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mPrice.setText(String.valueOf(mArray.get(position).getPrice()));
         holder.mName.setText(mArray.get(position).getName());
+
         Picasso.with(mContext).load(mArray.get(position).getImage()).into(holder.mImage);
+
+
         int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8;
-        int height =  mContext.getResources().getDisplayMetrics().widthPixels / 2;
+        int height = (int) (mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8 * 1.5);
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
         holder.mParentLayout.setLayoutParams(layoutParams);
     }
@@ -67,7 +69,7 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
         private TextView mPrice;
         private TextView mName;
         private CardView mParentLayout;
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
 
             mImage = itemView.findViewById(R.id.img_dish);

@@ -13,5 +13,6 @@ public class Constant {
 
     public static String [] TYPE = {"Appetizers", "Cheese_Biscuits", "Cold_Starters", "Desserts", "Main_Courses", "Soups"};
     public static String DISHCHOOSE = "DishChoose";
+    public static String GET_BILL = "XEM_HOA_DON";
     public static String TABLE_NAME = "TABLE_NAME";
 }

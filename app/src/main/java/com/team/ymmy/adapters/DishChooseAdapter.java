@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.team.ymmy.async.ImageAsync;
-import com.team.ymmy.model.DishChoose;
 import com.team.ymmy.model.DishChooseModel;
 import com.team.ymmy.yummyapp.R;
 

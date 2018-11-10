@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +24,10 @@ import com.team.ymmy.adapters.CheckoutAdataper;
 import com.team.ymmy.adapters.DishChooseAdapter;
 import com.team.ymmy.constant.Constant;
 import com.team.ymmy.model.DishChooseModel;
+import com.team.ymmy.model.DishModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CheckoutActivity extends AppCompatActivity implements ValueEventListener, View.OnClickListener {
 
@@ -94,11 +97,27 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
         return super.onOptionsItemSelected(item);
     }
 
+    private int indexOf(ArrayList<DishChooseModel> array, DishChooseModel dish){
+        for(int i = 0; i < array.size(); i++){
+            if(equal(array.get(i), dish)) return i;
+        }
+        return -1;
+    }
+    private boolean equal(DishChooseModel a, DishChooseModel b){
+        if(a.getId() == b.getId() && a.getName().equals(b.getName())) return true;
+        return false;
+    }
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         for (DataSnapshot ds : dataSnapshot.getChildren()){
             DishChooseModel dish = ds.getValue(DishChooseModel.class);
-            arrayList.add(dish);
+            int idx = indexOf(arrayList, dish);
+            if (idx >= 0){
+                int count = arrayList.get(idx).getCounter() + dish.getCounter();
+                arrayList.get(idx).setCounter(count);
+            }else{
+                arrayList.add(dish);
+            }
         }
         adapter.notifyDataSetChanged();
     }
@@ -133,6 +152,9 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
                         public void onClick(View v) {
                             // deleteDataOnFirebase;
                             databaseReference.child("danhsachbanan").child("ban_" + (table_order + 1)).child("status").setValue(false);
+                            for (int i = 0; i < arrayList.size(); i++){
+                                databaseReference.child(Constant.GET_BILL).child("ban_" + (table_order + 1) +"_"+ System.currentTimeMillis()).push().setValue(arrayList.get(i));
+                            }
                             databaseReference.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).removeValue(new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -154,7 +176,7 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
     private int getTotalPrice() {
         int total = 0;
         for (int i = 0; i < arrayList.size(); i++){
-            total += arrayList.get(i).getPrice();
+            total += arrayList.get(i).getPrice() * arrayList.get(i).getCounter();
         }
         return total;
     }
