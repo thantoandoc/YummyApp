@@ -14,12 +14,23 @@
         app:title="TableList"
         app:titleTextColor="@color/white"
         android:layout_height="?attr/actionBarSize"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_grid_table"
-        android:numColumns="auto_fit"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:gravity="center" />
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_table"
+            android:layout_margin="@dimen/activity_margin"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_grid_table"
+            android:numColumns="auto_fit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:gravity="center" />
+    </RelativeLayout>
 
 </LinearLayout>

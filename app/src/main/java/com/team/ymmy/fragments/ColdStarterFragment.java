@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,8 @@ public class ColdStarterFragment extends Fragment{
     private DishAdapterRecycler mDishAdapter;
     private FirebaseDatabase database;
     private DatabaseReference mColdStarterRef;
+
+    private ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class ColdStarterFragment extends Fragment{
                     mDishArray.add(dish);
                     Log.d("AAAAAAAAAAAAA", "onDataChange: " + dish);
                 }
+                progressBar.setVisibility(View.INVISIBLE);
                 mDishAdapter.notifyDataSetChanged();
             }
 
@@ -57,6 +61,8 @@ public class ColdStarterFragment extends Fragment{
     }
 
     private void mapWidgets(View rootView) {
+        progressBar = rootView.findViewById(R.id.progress_dish);
+        progressBar.setVisibility(View.VISIBLE);
         mColdStartGrid = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
         mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 2);

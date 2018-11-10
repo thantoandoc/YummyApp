@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ public class CheesesFragment extends Fragment {
     private DatabaseReference mCheeseRef;
     private FirebaseDatabase database;
     private ArrayList<DishModel> mDSMonAn;
+    private ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class CheesesFragment extends Fragment {
                     DishModel dish = ds.getValue(DishModel.class);
                     mDishArray.add(dish);
                 }
+                progressBar.setVisibility(View.INVISIBLE);
                 mDishAdapter.notifyDataSetChanged();
             }
 
@@ -60,6 +63,8 @@ public class CheesesFragment extends Fragment {
     }
 
     private void mapWidgets(View rootView) {
+        progressBar = rootView.findViewById(R.id.progress_dish);
+        progressBar.setVisibility(View.VISIBLE);
         mCheesesGrid = rootView.findViewById(R.id.recycler_grid_dish);
         mDishArray = new ArrayList<>();
         mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 1);

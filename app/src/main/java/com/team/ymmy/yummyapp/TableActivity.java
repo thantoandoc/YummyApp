@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,10 +27,12 @@ public class TableActivity extends AppCompatActivity {
 
     private ArrayList<Table> mTableList;
     private Toolbar mToolbar;
+    private ProgressBar progressBar;
     private TableAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private FirebaseDatabase database;
     private DatabaseReference mTableListRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,7 @@ public class TableActivity extends AppCompatActivity {
     }
     private void mapViews() {
         mToolbar = findViewById(R.id.toolbar_table);
+        progressBar = findViewById(R.id.progress_table);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_grid_table);
         mTableList = new ArrayList<>();
         mAdapter = new TableAdapter(TableActivity.this, R.layout.item_table, mTableList);
@@ -80,11 +85,12 @@ public class TableActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mTableList.clear();
+                progressBar.setVisibility(View.INVISIBLE);
                 for( DataSnapshot ds: dataSnapshot.getChildren()) {
                     Table table = ds.getValue(Table.class);
                     mTableList.add(table);
+                    mAdapter.notifyDataSetChanged();
                 }
-                mAdapter.notifyDataSetChanged();
             }
 
             @Override
