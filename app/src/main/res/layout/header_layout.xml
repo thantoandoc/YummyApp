@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="@dimen/item_dish"
-    android:background="@color/colorPrimaryDark">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:padding="@dimen/activity_margin"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_margin="@dimen/activity_padding"
+        android:src="@drawable/icon_yummy"
+        android:layout_width="@dimen/marginRight_floating_button"
+        android:layout_height="@dimen/marginRight_floating_button" />
+
+    <TextView
+        android:id="@+id/coName"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name_company"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_cost" />
+    <TextView
+        android:id="@+id/coAddress"
+        android:text="@string/address_company"
+        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:textSize="@dimen/text_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

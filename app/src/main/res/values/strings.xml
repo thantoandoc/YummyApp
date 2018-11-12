@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">YummyApp</string>
     <string name="app_name_icon">YUMMY</string>
+    <string name="app_name_company">Yummy Restaurant</string>
+    <string name="address_company">54 Nguyễn Lương Bằng - Đà Nẵng</string>
     <string name="text_login">Log In</string>
-    <string name="text_username">USERNAME</string>
+    <string name="text_username">EMAIL</string>
     <string name="text_password">PASSWORD</string>
     <string name="remember">REMEMBER</string>
     <string name="forgot_password"><u>Forgot your password?</u></string>
@@ -15,8 +17,8 @@
     <string name="action_main_courses">MAIN COURSES</string>
     <string name="action_cheese_biscuits">CHEESE &amp; BISCUITS</string>
     <string name="action_desserts">DESSERTS</string>
-    <string name="action_checkout">THANH TOÁN</string>
-    <string name="action_order">ĐẶT MÓN</string>
+    <string name="action_checkout">PAY</string>
+    <string name="action_order">ORDER</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">CANCEL</string>
     <string name="action_add">+</string>

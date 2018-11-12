@@ -3,23 +3,26 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_padding">
+    android:layout_margin="@dimen/activity_padding"
+    android:theme="@style/AppTheme.CustomCardView">
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_dish">
         <ImageView
             android:id="@+id/img_catalog"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_dish" />
+            android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/txt_catalog_name"
+            android:background="@drawable/border_dish"
             android:textStyle="bold"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp"
-            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_name"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/activity_margin"
             android:textAlignment="center"
-            android:text="Ten"
-            android:id="@+id/txt_catalog_name"
+            android:padding="@dimen/activity_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />

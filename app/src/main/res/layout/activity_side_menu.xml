@@ -25,16 +25,14 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_dish"></fragment>
+            tools:layout="@layout/fragment_dish"/>
     </LinearLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:fitsSystemWindows="true"
-        app:itemTextColor="@color/drawer_item"
-        app:itemIconTint="@color/drawer_item"
         app:itemBackground="@drawable/nav_item_drawable"
         app:headerLayout="@layout/header_layout"
         app:menu="@menu/navigation_menu">

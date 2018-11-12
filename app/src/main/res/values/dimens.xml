@@ -8,7 +8,7 @@
     <dimen name="border_button">24dp</dimen>
     <dimen name="text_size_name">23sp</dimen>
     <dimen name="text_size_cost">16sp</dimen>
-
+    <dimen name="text_address">10sp</dimen>
     <dimen name="border_dish">10dp</dimen>
     <dimen name="item_dish">200dp</dimen>
     <dimen name="item_dish_height">250dp</dimen>
