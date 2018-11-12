@@ -11,6 +11,7 @@
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowFullscreen">true</item>
+
     </style>
 
     <style name="transparentBackground">
@@ -27,5 +28,8 @@
     </style>
     <style name="AppTheme.CustomCardView">
         <item name="cardViewStyle">@style/CardView.Light</item>
+    </style>
+    <style name="AppTheme.OverLay">
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 </resources>

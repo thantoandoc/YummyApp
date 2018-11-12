@@ -4,6 +4,7 @@
     <string name="app_name_company">Yummy Restaurant</string>
     <string name="address_company">54 Nguyễn Lương Bằng - Đà Nẵng</string>
     <string name="text_login">Log In</string>
+    <string name="text_log_out">Log Out</string>
     <string name="text_username">EMAIL</string>
     <string name="text_password">PASSWORD</string>
     <string name="remember">REMEMBER</string>

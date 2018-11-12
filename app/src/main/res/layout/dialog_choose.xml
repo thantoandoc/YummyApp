@@ -15,9 +15,9 @@
         <ImageView
             android:src="@drawable/background"
             android:id="@+id/img_dish_dialog"
-            android:layout_width="@dimen/item_dish_choose"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/item_dish_choose"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_padding"
             />
@@ -32,7 +32,6 @@
                 android:id="@+id/txt_dish_name_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Food Name"
                 android:gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_name"
@@ -42,7 +41,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
-                android:text="60000 VND"
                 android:textSize="@dimen/text_size_cost"
 
                 />

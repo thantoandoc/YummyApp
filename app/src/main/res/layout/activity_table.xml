@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         app:title="TableList"
         app:titleTextColor="@color/white"
+        android:theme="@style/AppTheme.OverLay"
         android:layout_height="?attr/actionBarSize"/>
     <RelativeLayout
         android:layout_width="match_parent"

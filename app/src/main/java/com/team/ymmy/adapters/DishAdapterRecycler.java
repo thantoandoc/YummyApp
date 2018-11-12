@@ -51,10 +51,8 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
         holder.mName.setText(mArray.get(position).getName());
 
         Picasso.with(mContext).load(mArray.get(position).getImage()).into(holder.mImage);
-
-
         int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8;
-        int height = (int) (mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8 * 1.5);
+        int height = (int) ((mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8) * 1.1);
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
         holder.mParentLayout.setLayoutParams(layoutParams);
     }
