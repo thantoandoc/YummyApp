@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -111,10 +112,10 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_categories:{
-                if(mDrawerLayout.isDrawerOpen(Gravity.RIGHT)){
-                    mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                if(mDrawerLayout.isDrawerOpen(Gravity.END)){
+                    mDrawerLayout.closeDrawer(Gravity.END);
                 }else {
-                    mDrawerLayout.openDrawer(Gravity.RIGHT);
+                    mDrawerLayout.openDrawer(Gravity.END);
                 }
                 return true;
             }
@@ -127,43 +128,43 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
-    public boolean onNavigationItemSelected( MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment;
         switch (item.getItemId()) {
             case R.id.action_cold_starter : {
                 fragment = new ColdStarterFragment();
                 changeFragment(fragment);
-                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_appetizers : {
                 fragment = new AppetizersFragment();
                 changeFragment(fragment);
-                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_soup : {
                 fragment = new SoupsFragment();
                 changeFragment(fragment);
-                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_main_courses : {
                 fragment = new MainCoursesFragment();
                 changeFragment(fragment);
-                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_cheese_biscuits : {
                 fragment = new CheesesFragment();
                 changeFragment(fragment);
-                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_desserts : {
                 fragment = new DessertsFragment();
                 changeFragment(fragment);
-                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
         }
