@@ -2,11 +2,13 @@ package com.team.ymmy.adapters;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +53,22 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
         holder.mName.setText(mArray.get(position).getName());
 
         Picasso.with(mContext).load(mArray.get(position).getImage()).into(holder.mImage);
-        int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8;
-        int height = (int) ((mContext.getResources().getDisplayMetrics().widthPixels / 2 - 8) * 1.1);
+        int w = (int) convertDpToPixel(1, mContext);
+        int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 4 * w;
+        int height = (int) ((mContext.getResources().getDisplayMetrics().widthPixels / 2 - 4 * w) * 1.1);
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
+        layoutParams.setMargins(w, w, w, w);
         holder.mParentLayout.setLayoutParams(layoutParams);
     }
-
+    private static float convertPixelsToDp(float px, Context context){
+        return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+    private static float convertDpToPixel(float dp, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
+    }
     @Override
     public int getItemCount() {
         return mArray.size();

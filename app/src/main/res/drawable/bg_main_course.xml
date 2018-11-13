@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="transparent">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
     <!-- The background color, preferably the same as your normal theme -->
     <!-- Your product logo - 144dp color version of your app icon -->
     <item>
         <bitmap
-            android:src="@drawable/background"
+            android:tileMode="mirror"
+            android:alpha="0.6"
+            android:src="@drawable/maincourse"
             android:gravity="center"/>
     </item>
 </layer-list>

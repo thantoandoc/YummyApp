@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.design.widget.FloatingActionButton
@@ -9,21 +8,24 @@
         android:layout_width="@dimen/btn_height"
         android:layout_height="@dimen/btn_height"
         android:layout_marginBottom="@dimen/marginRight_floating_button"
+        android:layout_marginEnd="@dimen/activity_margin"
         android:layout_marginRight="@dimen/activity_margin"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/checklist"
         app:fabSize="normal"
         app:backgroundTint="@color/color_btn_choose"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible"/>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_payment"
         android:layout_width="@dimen/btn_height"
         android:layout_height="@dimen/btn_height"
-        android:layout_marginBottom="@dimen/activity_margin_horizontal"
+        android:layout_marginBottom="@dimen/activity_margin"
         android:layout_marginRight="@dimen/marginRight_floating_button"
+        android:layout_marginEnd="@dimen/marginRight_floating_button"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/payment"
         app:fabSize="normal"

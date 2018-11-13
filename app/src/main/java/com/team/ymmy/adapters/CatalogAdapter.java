@@ -65,7 +65,7 @@ public class CatalogAdapter extends BaseAdapter {
         }
 
         Catalog catalog = (Catalog) getItem(position);
-        holder.imgCatalogImage.setBackgroundResource(catalog.getHinh());
+        holder.imgCatalogImage.setImageResource(catalog.getHinh());
         holder.txtCatalogName.setText(catalog.getTen());
 
         return convertView;

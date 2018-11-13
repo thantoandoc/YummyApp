@@ -61,12 +61,12 @@ public class CatalogActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void setControls() {
-        mDanhMucMonAn.add(new Catalog("Cold Starter",R.drawable.starter));
-        mDanhMucMonAn.add(new Catalog("Appetizers",R.drawable.app));
-        mDanhMucMonAn.add(new Catalog("Soup",R.drawable.soup));
-        mDanhMucMonAn.add(new Catalog("Main Course",R.drawable.maincourse));
-        mDanhMucMonAn.add(new Catalog("Cheese & Biscuits",R.drawable.cheese));
-        mDanhMucMonAn.add(new Catalog("Dessert",R.drawable.desserts));
+        mDanhMucMonAn.add(new Catalog("Cold Starter",R.drawable.bg_start));
+        mDanhMucMonAn.add(new Catalog("Appetizers",R.drawable.bg_appetizer));
+        mDanhMucMonAn.add(new Catalog("Soup",R.drawable.bg_soup));
+        mDanhMucMonAn.add(new Catalog("Main Course",R.drawable.bg_main_course));
+        mDanhMucMonAn.add(new Catalog("Cheese & Biscuits",R.drawable.bg_cheese));
+        mDanhMucMonAn.add(new Catalog("Dessert",R.drawable.bg_dessert));
 
         catalogAdapter.notifyDataSetChanged();
     }

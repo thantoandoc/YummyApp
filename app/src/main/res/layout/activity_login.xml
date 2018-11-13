@@ -46,12 +46,13 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:padding="@dimen/activity_padding"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:background="@color/wrapper_input"
-            android:layout_height="wrap_content">
+            android:background="@drawable/wrapper_input"
+            android:layout_height="@dimen/btn_height">
             <ImageView
+                android:layout_marginLeft="@dimen/margin_icon"
+                android:layout_marginRight="@dimen/margin_icon"
                 android:padding="@dimen/activity_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,19 +66,21 @@
                 android:hint="@string/text_username"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-
+                android:layout_marginEnd="@dimen/activity_padding"
+                android:layout_marginRight="@dimen/activity_padding"
                 android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
-            android:padding="@dimen/activity_padding"
             android:gravity="center"
-            android:background="@color/wrapper_input"
+            android:background="@drawable/wrapper_input"
             android:layout_marginTop="@dimen/activity_padding"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/btn_height">
             <ImageView
                 android:padding="@dimen/activity_padding"
+                android:layout_marginLeft="@dimen/margin_icon"
+                android:layout_marginRight="@dimen/margin_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/lock"
@@ -90,6 +93,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
+                android:layout_marginEnd="@dimen/activity_padding"
+                android:layout_marginRight="@dimen/activity_padding"
                 android:singleLine="true"/>
         </LinearLayout>
         <Button
