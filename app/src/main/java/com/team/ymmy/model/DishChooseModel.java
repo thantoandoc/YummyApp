@@ -6,11 +6,7 @@ public class DishChooseModel extends DishModel {
         super();
     }
     public DishChooseModel(DishModel d, int counter){
-        super(d.getId(), d.getName(), d.getImage(), d.getPrice());
-        this.counter = counter;
-    }
-    public DishChooseModel(int ID, String mName, String mImage, long mPrice , int counter){
-        super(ID, mName, mImage, mPrice);
+        super(d.getId(), d.getName(), d.getImage(), d.getPrice(), d.getStartAt(), d.getUpdateAt(), d.getDiscount());
         this.counter = counter;
     }
 

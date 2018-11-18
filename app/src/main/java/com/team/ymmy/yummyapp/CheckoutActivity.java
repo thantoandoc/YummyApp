@@ -34,6 +34,7 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
     private Toolbar mToolbar;
     private int table_order;
     private Button  btnCheckout;
+    private TextView totalPrice;
     private RecyclerView mRecyclerDish;
     private DishChooseAdapter adapter;
     private CheckoutAdataper checkoutAdataper;
@@ -59,6 +60,7 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
         table_order = intent.getIntExtra(Constant.TABLE_NAME, 0);
         mToolbar = findViewById(R.id.toolbar_checkout);
         btnCheckout = findViewById(R.id.btn_checkout);
+        totalPrice = findViewById(R.id.totalPrice);
         arrayList = new ArrayList<>();
         mRecyclerDish = findViewById(R.id.recycler_dish_for_checkout);
         adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList);
@@ -120,6 +122,7 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
             }
         }
         adapter.notifyDataSetChanged();
+        totalPrice.setText(String.valueOf(getTotalPrice()));
     }
 
     @Override
@@ -131,44 +134,58 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_checkout:
-                if(arrayList.size() > 0){
-                    int mTotalPrice = getTotalPrice();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogTransparentStyle);
-                    View rootView = LayoutInflater.from(this).inflate(R.layout.dialog_checkout, null);
-                    RecyclerView mCheckoutRecycle = rootView.findViewById(R.id.recycler_dish_checkout);
-                    Button btnCheckoutDialog = rootView.findViewById(R.id.btn_dialog_checkout);
-                    TextView totalPrice = rootView.findViewById(R.id.totalPrice);
-
-                    mCheckoutRecycle.setAdapter(checkoutAdataper);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-                    mCheckoutRecycle.setLayoutManager(mLayoutManager);
-
-                    totalPrice.setText(String.valueOf(mTotalPrice));
-                    builder.setView(rootView);
-                    final AlertDialog alertDialog = builder.create();
-                    //handleEvents of Button;
-                    btnCheckoutDialog.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // deleteDataOnFirebase;
-                            databaseReference.child("danhsachbanan").child("ban_" + (table_order + 1)).child("status").setValue(false);
-                            for (int i = 0; i < arrayList.size(); i++){
-                                databaseReference.child(Constant.GET_BILL).child("ban_" + (table_order + 1) +"_"+ System.currentTimeMillis()).push().setValue(arrayList.get(i));
-                            }
-                            databaseReference.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).removeValue(new DatabaseReference.CompletionListener() {
-                                @Override
-                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                    if(databaseError == null){
-                                        Intent intent = new Intent(getApplicationContext(), TableActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }
-                            });
-                        }
-                    });
-                    alertDialog.show();
+                databaseReference.child("danhsachbanan").child("ban_" + (table_order + 1)).child("status").setValue(false);
+                for (int i = 0; i < arrayList.size(); i++){
+                    databaseReference.child(Constant.GET_BILL).child("ban_" + (table_order + 1) +"_"+ System.currentTimeMillis()).push().setValue(arrayList.get(i));
                 }
+                databaseReference.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if(databaseError == null){
+                            Intent intent = new Intent(getApplicationContext(), TableActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
                 break;
+//                if(arrayList.size() > 0){
+//                    int mTotalPrice = getTotalPrice();
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogTransparentStyle);
+//                    View rootView = LayoutInflater.from(this).inflate(R.layout.dialog_checkout, null);
+//                    RecyclerView mCheckoutRecycle = rootView.findViewById(R.id.recycler_dish_checkout);
+//                    Button btnCheckoutDialog = rootView.findViewById(R.id.btn_dialog_checkout);
+//                    TextView totalPrice = rootView.findViewById(R.id.totalPrice);
+//
+//                    mCheckoutRecycle.setAdapter(checkoutAdataper);
+//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+//                    mCheckoutRecycle.setLayoutManager(mLayoutManager);
+//
+//                    totalPrice.setText(String.valueOf(mTotalPrice));
+//                    builder.setView(rootView);
+//                    final AlertDialog alertDialog = builder.create();
+//                    //handleEvents of Button;
+//                    btnCheckoutDialog.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            // deleteDataOnFirebase;
+//                            databaseReference.child("danhsachbanan").child("ban_" + (table_order + 1)).child("status").setValue(false);
+//                            for (int i = 0; i < arrayList.size(); i++){
+//                                databaseReference.child(Constant.GET_BILL).child("ban_" + (table_order + 1) +"_"+ System.currentTimeMillis()).push().setValue(arrayList.get(i));
+//                            }
+//                            databaseReference.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).removeValue(new DatabaseReference.CompletionListener() {
+//                                @Override
+//                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//                                    if(databaseError == null){
+//                                        Intent intent = new Intent(getApplicationContext(), TableActivity.class);
+//                                        startActivity(intent);
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    });
+//                    alertDialog.show();
+//                }
+
         }
 
     }
@@ -176,7 +193,11 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
     private int getTotalPrice() {
         int total = 0;
         for (int i = 0; i < arrayList.size(); i++){
-            total += arrayList.get(i).getPrice() * arrayList.get(i).getCounter();
+            if(arrayList.get(i).getDiscount() > 0){
+                total += ((int) (arrayList.get(i).getPrice() -  arrayList.get(i).getPrice() *  arrayList.get(i).getDiscount() / 100)) * arrayList.get(i).getCounter();
+            }else{
+                total += arrayList.get(i).getPrice() * arrayList.get(i).getCounter();
+            }
         }
         return total;
     }

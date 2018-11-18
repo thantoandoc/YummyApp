@@ -14,21 +14,54 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
 
-    <Button
-        android:text="@string/action_order"
-        android:background="@drawable/border_choose_dish_btn"
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_padding"
+    <RelativeLayout
+        android:id="@+id/wrapper_btn"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/white"/>
+        android:layout_margin="@dimen/activity_padding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height">
+        <LinearLayout
+            android:layout_toStartOf="@+id/btn_submit"
+            android:layout_toLeftOf="@+id/btn_submit"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_price"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_name" />
+
+            <TextView
+                android:id="@+id/totalPriceOrder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center"
+                android:text="0"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_cost" />
+        </LinearLayout>
+        <Button
+            android:text="@string/action_order"
+            android:background="@drawable/border_choose_dish_btn"
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_dish_choose"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btn_submit"
+        android:layout_above="@id/wrapper_btn"
         android:layout_below="@id/toolbar_list_choose"/>
 
 

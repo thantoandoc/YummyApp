@@ -6,14 +6,19 @@ import android.graphics.PorterDuff;
 import android.os.PatternMatcher;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.constraint.Constraints;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +28,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
+import com.team.ymmy.interfaces.InternetConnection;
+
+import java.util.TimerTask;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -52,6 +61,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void showSnack() {
+        Snackbar snackbar = Snackbar.make( findViewById(R.id.layout_login) , R.string.nE, Snackbar.LENGTH_SHORT);
+        snackbar.getView().setBackgroundResource(R.color.color_btn_choose);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) snackbar.getView().getLayoutParams();
+        layoutParams.setMargins(0,0,0,0);
+        snackbar.getView().setLayoutParams(layoutParams);
+        snackbar.show();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +89,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_login:
-                loginEvent();
+            case R.id.btn_login:{
+                if(new InternetConnection(this).isNetworkConnected()){
+                    loginEvent();
+                }else {
+                    showSnack();
+                }
+            }
         }
     }
     private void loginEvent() {
@@ -139,7 +163,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLogin = (Button)findViewById(R.id.btn_login);
         mRemember=(CheckBox)findViewById(R.id.chk_remember);
         mForgotPassword=(TextView)findViewById(R.id.txt_forgot_password);
-
         progressBar = findViewById(R.id.progressbar_login);
         progressBar.getIndeterminateDrawable().setColorFilter(0xf3bfedff, PorterDuff.Mode.SRC_ATOP);
 

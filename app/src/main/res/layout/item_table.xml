@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     android:id="@+id/parent_layout"
     android:foreground="?attr/selectableItemBackground"
+    android:theme="@style/AppTheme.CustomCardView"
     android:layout_gravity="center"
     android:layout_centerInParent="true"
     android:layout_marginTop="@dimen/activity_padding"

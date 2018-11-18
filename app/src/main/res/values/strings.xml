@@ -26,7 +26,10 @@
     <string name="action_sub">-</string>
     <string name="total_price">TOTAL : </string>
     <string name="get_bill">GET BILL</string>
-
+    <!--check internet-->
+    <string name="nE">INTERNET WAS DISCONNECTED</string>
+    <string name="hE">INTERNET WAS CONNECTED</string>
+    <string name="action_delete">DELETE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--TODO: Login-->

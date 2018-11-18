@@ -1,6 +1,7 @@
 package com.team.ymmy.yummyapp;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.ymmy.adapters.TableAdapter;
+import com.team.ymmy.interfaces.InternetConnection;
 import com.team.ymmy.model.Table;
 
 import java.util.ArrayList;
@@ -34,6 +37,11 @@ public class TableActivity extends AppCompatActivity {
     private DatabaseReference mTableListRef;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
@@ -41,8 +49,17 @@ public class TableActivity extends AppCompatActivity {
         mapViews();
         setupToolbar();
         setControls();
-    }
 
+    }
+    private void showSnack() {
+        Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , R.string.nE, Snackbar.LENGTH_INDEFINITE);
+        snackbar.getView().setBackgroundResource(R.color.black);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) snackbar.getView().getLayoutParams();
+        layoutParams.setMargins(0,0,0,0);
+        snackbar.getView().setLayoutParams(layoutParams);
+        snackbar.show();
+
+    }
 
     private void setupToolbar() {
         setSupportActionBar(mToolbar);

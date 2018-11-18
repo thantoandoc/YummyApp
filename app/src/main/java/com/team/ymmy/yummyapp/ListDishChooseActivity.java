@@ -1,16 +1,22 @@
 package com.team.ymmy.yummyapp;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +34,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
     private Toolbar mToolbar;
     private RecyclerView mRecyclerDish;
     private Button btn_submit;
+    private TextView totalPriceOrder;
     private DishChooseAdapter adapter;
     private ArrayList<DishChooseModel> arrayList;
     private int table_order;
@@ -47,6 +54,18 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         btn_submit.setOnClickListener(this);
     }
 
+    private int getTotalPrice() {
+        int total = 0;
+        for (int i = 0; i < arrayList.size(); i++){
+            if(arrayList.get(i).getDiscount() > 0){
+                total += ((int) (arrayList.get(i).getPrice() -  arrayList.get(i).getPrice() *  arrayList.get(i).getDiscount() / 100)) * arrayList.get(i).getCounter();
+            }else{
+                total += arrayList.get(i).getPrice() * arrayList.get(i).getCounter();
+            }
+        }
+        return total;
+    }
+
     private void mapWidgets() {
         Intent intent = getIntent();
         table_order = intent.getIntExtra(Constant.TABLE_NAME, 0);
@@ -54,15 +73,63 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         mRecyclerDish = findViewById(R.id.recycler_dish_choose);
         arrayList = new ArrayList<>();
         btn_submit = findViewById(R.id.btn_submit);
+        totalPriceOrder = findViewById(R.id.totalPriceOrder);
         adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList);
         mRecyclerDish.setAdapter(adapter);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerDish.setLayoutManager(mLayoutManager);
+        initSwipe();
 
         database = FirebaseDatabase.getInstance().getReference();
-
         getDatas();
+
 }
+
+    private void initSwipe() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                final int position = viewHolder.getAdapterPosition();
+                final DishChooseModel deleteItem= adapter.getItem(position);
+
+                if (direction == ItemTouchHelper.LEFT){
+                    adapter.removeItem(position);
+                    Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , "This dish was removed",Snackbar.LENGTH_LONG);
+                    snackbar.setAction("UNDO", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            adapter.restoreItem(deleteItem, position);
+                        }
+                    });
+                    snackbar.setActionTextColor(Color.GREEN);
+                    snackbar.show();
+                }
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+                final View foregroundView = ((DishChooseAdapter.ViewHolder) viewHolder).viewForeground;
+                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+                    foregroundView.setTranslationX(dX);
+                }else {
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                }
+
+
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerDish);
+    }
+
+
+
 
     private void getDatas() {
         database.child("DishChoose").child("ban_" +(table_order  + 1)).addValueEventListener(this);
@@ -128,6 +195,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
 
             adapter.notifyDataSetChanged();
         }
+        totalPriceOrder.setText(String.valueOf(getTotalPrice()));
     }
 
     @Override

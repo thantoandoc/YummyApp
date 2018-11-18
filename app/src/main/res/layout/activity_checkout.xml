@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color_recycle"
@@ -14,21 +13,53 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
 
-    <Button
-        android:text="@string/action_checkout"
-        android:background="@drawable/border_choose_dish_btn"
-        android:id="@+id/btn_checkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/wrapper_btn"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/activity_padding"
-        android:textColor="@color/white"/>
-    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height">
+        <LinearLayout
+            android:layout_toStartOf="@+id/btn_checkout"
+            android:layout_toLeftOf="@+id/btn_checkout"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btn_dialog_checkout"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_padding">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_price"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_name" />
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center"
+                android:text="0"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_cost" />
+        </LinearLayout>
+        <Button
+            android:text="@string/action_checkout"
+            android:background="@drawable/border_choose_dish_btn"
+            android:id="@+id/btn_checkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_dish_for_checkout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btn_checkout"
+        android:layout_above="@id/wrapper_btn"
         android:layout_below="@id/toolbar_checkout"/>
 
 
