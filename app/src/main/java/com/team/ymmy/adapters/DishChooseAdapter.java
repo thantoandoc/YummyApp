@@ -52,17 +52,24 @@ public class DishChooseAdapter extends RecyclerView.Adapter<DishChooseAdapter.Vi
             holder.mOrginPrice.setText(String.valueOf(mArrayDish.get(position).getPrice()));
             holder.mPrice.setText(String.valueOf((int) (mArrayDish.get(position).getPrice() - mArrayDish.get(position).getPrice() * 1.0 * (mArrayDish.get(position).getDiscount()) / 100)  ));
         }else{
+            holder.mOrginPrice.setVisibility(View.INVISIBLE);
             holder.mPrice.setText(String.valueOf(mArrayDish.get(position).getPrice()));
         }
         holder.mName.setText(mArrayDish.get(position).getName());
         Picasso.with(mContext).load(mArrayDish.get(position).getImage()).into(holder.mImage);
         if(isNew(mArrayDish.get(position))){
             holder.mImageNew.setVisibility(View.VISIBLE);
+        }else{
+            holder.mImageNew.setVisibility(View.INVISIBLE);
         }
         if(isSale(mArrayDish.get(position))){
             holder.mImageSale.setVisibility(View.VISIBLE);
+            holder.mDiscount.setVisibility(View.VISIBLE);
             StringBuffer str = new StringBuffer("-").append(mArrayDish.get(position).getDiscount()).append("%");
             holder.mDiscount.setText(str.toString());
+        }else{
+            holder.mImageSale.setVisibility(View.INVISIBLE);
+            holder.mDiscount.setVisibility(View.INVISIBLE);
         }
         holder.counter.setText(String.valueOf(mArrayDish.get(position).getCounter()));
     }
@@ -80,6 +87,18 @@ public class DishChooseAdapter extends RecyclerView.Adapter<DishChooseAdapter.Vi
     public void restoreItem(DishChooseModel item, int position ){
         mArrayDish.add(position,item);
         notifyItemInserted(position);
+
+    }
+    public int getTotalPrice() {
+        int total = 0;
+        for (int i = 0; i < mArrayDish.size(); i++){
+            if(mArrayDish.get(i).getDiscount() > 0){
+                total += ((int) (mArrayDish.get(i).getPrice() -  mArrayDish.get(i).getPrice() *  mArrayDish.get(i).getDiscount() / 100)) * mArrayDish.get(i).getCounter();
+            }else{
+                total += mArrayDish.get(i).getPrice() * mArrayDish.get(i).getCounter();
+            }
+        }
+        return total;
     }
 
     public DishChooseModel getItem(int position){

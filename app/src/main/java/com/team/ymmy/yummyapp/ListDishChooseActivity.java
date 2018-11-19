@@ -1,9 +1,14 @@
 package com.team.ymmy.yummyapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -13,11 +18,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.internal.to;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,18 +61,6 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         btn_submit.setOnClickListener(this);
     }
 
-    private int getTotalPrice() {
-        int total = 0;
-        for (int i = 0; i < arrayList.size(); i++){
-            if(arrayList.get(i).getDiscount() > 0){
-                total += ((int) (arrayList.get(i).getPrice() -  arrayList.get(i).getPrice() *  arrayList.get(i).getDiscount() / 100)) * arrayList.get(i).getCounter();
-            }else{
-                total += arrayList.get(i).getPrice() * arrayList.get(i).getCounter();
-            }
-        }
-        return total;
-    }
-
     private void mapWidgets() {
         Intent intent = getIntent();
         table_order = intent.getIntExtra(Constant.TABLE_NAME, 0);
@@ -86,7 +81,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
 }
 
     private void initSwipe() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT  ) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -99,29 +94,81 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
 
                 if (direction == ItemTouchHelper.LEFT){
                     adapter.removeItem(position);
+                    totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
                     Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , "This dish was removed",Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             adapter.restoreItem(deleteItem, position);
+                            mRecyclerDish.scrollToPosition(position);
+                            totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
                         }
                     });
                     snackbar.setActionTextColor(Color.GREEN);
                     snackbar.show();
                 }
-            }
+                if (direction == ItemTouchHelper.RIGHT){
 
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-
-                final View foregroundView = ((DishChooseAdapter.ViewHolder) viewHolder).viewForeground;
-                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-                    foregroundView.setTranslationX(dX);
-                }else {
-                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 }
 
 
+            }
+
+            private float convertDpToPixel(float dp, Context context){
+                Resources resources = context.getResources();
+                DisplayMetrics metrics = resources.getDisplayMetrics();
+                float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+                return px;
+            }
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+//                final View foregroundView = ((DishChooseAdapter.ViewHolder) viewHolder).viewForeground;
+//                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+//                    foregroundView.setTranslationX(dX);
+//                }else {
+//                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//                }
+                View itemView = viewHolder.itemView;
+                Paint paint = new Paint();
+                Bitmap icon;
+
+                if(dX > 0) {
+                    paint.setColor(Color.parseColor("#3F51B5"));
+                    icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_edit_24);
+                    // Draw Rect with varying right side, equal to displacement dX
+
+                    RectF background = new RectF((float) itemView.getLeft() - dX,
+                            (float) itemView.getTop() +  convertDpToPixel(4, getApplicationContext()),
+                            (float) itemView.getRight(),
+                            (float) itemView.getBottom() - convertDpToPixel(4, getApplicationContext()));
+
+                    c.drawRect(background, paint);
+
+                    // Set the image icon for right swipe
+                    c.drawBitmap(icon, (float) itemView.getLeft() + convertDpToPixel(16, getApplicationContext()), (float) itemView.getTop() +
+                            ((float) itemView.getBottom() - (float) itemView.getTop() - icon.getHeight()) / 2, paint);
+
+                } else {
+                    paint.setColor(Color.parseColor("#FF0000"));
+                    icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete_24);
+                    // Draw Rect with varying right side, equal to displacement dX
+
+                    RectF background = new RectF((float) itemView.getRight() + dX,
+                            (float) itemView.getTop() +  convertDpToPixel(4, getApplicationContext()),
+                            (float) itemView.getRight(),
+                            (float) itemView.getBottom() - convertDpToPixel(4, getApplicationContext()));
+
+                    c.drawRect(background, paint);
+
+                    // Set the image icon for right swipe
+                    c.drawBitmap(icon, (float) itemView.getRight() - convertDpToPixel(40, getApplicationContext()), (float) itemView.getTop() +
+                            ((float) itemView.getBottom() - (float) itemView.getTop() - icon.getHeight()) / 2, paint);
+
+                }
+
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
@@ -195,7 +242,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
 
             adapter.notifyDataSetChanged();
         }
-        totalPriceOrder.setText(String.valueOf(getTotalPrice()));
+        totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
     }
 
     @Override
