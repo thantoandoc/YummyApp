@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Yummy</string>
+    <string name="app_name_icon">YUMMY</string>
+    <string name="app_name_company">Nhà Hàng YUMMY</string>
+    <string name="address_company">54 Nguyễn Lương Bằng - Đà Nẵng</string>
+    <string name="text_login">Đăng Nhập</string>
+    <string name="text_log_out">Đăng Xuất</string>
+    <string name="text_username">Email</string>
+    <string name="text_password">Mật Khẩu</string>
+    <string name="remember">Lưu Tài Khoản</string>
+    <string name="forgot_password"><u>Quên mật khẩu?</u></string>
+    <string name="openDrawer">OpenDrawer</string>
+    <string name="closeDrawer">CloseDrawer</string>
+    <string name="action_categories">Danh Mục Thực Đơn</string>
+    <string name="action_cold_starter">Thức Uống</string>
+    <string name="action_appetizers">Món Khai Vị</string>
+    <string name="action_soup">Súp</string>
+    <string name="action_main_courses">Món Chính</string>
+    <string name="action_cheese_biscuits">Bánh Mì &amp; Phô Mai</string>
+    <string name="action_desserts">Món Tráng Miệng</string>
+    <string name="action_checkout">Thanh Toán</string>
+    <string name="action_order">Đặt Món Ăn</string>
+    <string name="action_ok">Xác nhận</string>
+    <string name="action_cancel">Hủy bỏ</string>
+    <string name="action_add">+</string>
+    <string name="action_sub">-</string>
+    <string name="total_price">Tổng giá : </string>
+    <string name="get_bill">Lấy Hóa Đơn</string>
+    <!--check internet-->
+    <string name="nE">Internet đã bị ngắt</string>
+    <string name="hE">Đã kết nối Internet</string>
+    <string name="action_delete">Xóa</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--TODO: Login-->
+    <string name="email_invalid">Email không hợp lệ!</string>
+    <string name="password_invalid">Mật khẩu không hợp lệ!</string>
+    <string-array name="languages">
+        <item>Tiếng Việt</item>
+        <item>Tiếng Anh</item>
+    </string-array>
+</resources>
