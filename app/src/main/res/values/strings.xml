@@ -5,6 +5,7 @@
     <string name="address_company">54 Nguyễn Lương Bằng - Đà Nẵng</string>
     <string name="text_login">Log In</string>
     <string name="text_log_out">Log Out</string>
+    <string name="text_language_setting">Language Settings</string>
     <string name="text_username">EMAIL</string>
     <string name="text_password">PASSWORD</string>
     <string name="remember">REMEMBER</string>
@@ -30,9 +31,29 @@
     <string name="nE">INTERNET WAS DISCONNECTED</string>
     <string name="hE">INTERNET WAS CONNECTED</string>
     <string name="action_delete">DELETE</string>
+    <string name="delete_string">This dish was removed</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--TODO: Login-->
+    <string name="email_require">Email is required!</string>
     <string name="email_invalid">Email invalid!</string>
+    <string name="password_require">Password is required!</string>
+    <string name="password_require_length">Password is required minimum 6 characters!</string>
     <string name="password_invalid">Password invalid!</string>
+
+    <!--login-->
+    <string name="action_login_success">Login success!</string>
+    <string name="action_login_fail">Login isn\'t success!</string>
+
+    <!--title-->
+    <string name="title_table_list">Table List</string>
+    <string name="title_language_dialog">Languages</string>
+
+
+    <string-array name="languages">
+        <item>Vietnamese</item>
+        <item>English</item>
+    </string-array>
+
+
 </resources>

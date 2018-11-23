@@ -78,11 +78,12 @@ public class DishAdapterRecycler  extends RecyclerView.Adapter<DishAdapterRecycl
             holder.mDiscount.setText(str.toString());
         }
         Picasso.with(mContext).load(mArray.get(position).getImage()).into(holder.mImage);
-        int w = (int) convertDpToPixel(1, mContext);
-        int width = mContext.getResources().getDisplayMetrics().widthPixels / 2 - 4 * w;
-        int height = (int) ((mContext.getResources().getDisplayMetrics().widthPixels / 2 - 4 * w) * 1.1);
+        int w_margin = (int) convertDpToPixel(1, mContext);
+        int spanCount = mContext.getResources().getInteger(R.integer.number_of_grid_items);
+        int width = mContext.getResources().getDisplayMetrics().widthPixels / spanCount - 4 * w_margin;
+        int height = (int) ((mContext.getResources().getDisplayMetrics().widthPixels / spanCount - 4 * w_margin) * 1.1);
         CardView.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
-        layoutParams.setMargins(w, w, w, w);
+        layoutParams.setMargins(w_margin, w_margin, w_margin, w_margin);
         holder.mParentLayout.setLayoutParams(layoutParams);
     }
     private static float convertPixelsToDp(float px, Context context){

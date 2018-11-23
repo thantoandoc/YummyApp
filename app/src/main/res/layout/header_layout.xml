@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryDark"
     android:padding="@dimen/activity_margin"
+    android:paddingTop="@dimen/wrapper_logo"
     android:orientation="vertical">
     <ImageView
         android:layout_margin="@dimen/activity_padding"
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name_company"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_cost" />
+        android:textSize="@dimen/text_name_restaurant" />
     <TextView
         android:id="@+id/coAddress"
         android:text="@string/address_company"

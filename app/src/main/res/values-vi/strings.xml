@@ -5,6 +5,7 @@
     <string name="address_company">54 Nguyễn Lương Bằng - Đà Nẵng</string>
     <string name="text_login">Đăng Nhập</string>
     <string name="text_log_out">Đăng Xuất</string>
+    <string name="text_language_setting">Thiết Lập Ngôn Ngữ</string>
     <string name="text_username">Email</string>
     <string name="text_password">Mật Khẩu</string>
     <string name="remember">Lưu Tài Khoản</string>
@@ -30,13 +31,23 @@
     <string name="nE">Internet đã bị ngắt</string>
     <string name="hE">Đã kết nối Internet</string>
     <string name="action_delete">Xóa</string>
+    <string name="delete_string">Món ăn đã được xóa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--TODO: Login-->
     <string name="email_invalid">Email không hợp lệ!</string>
     <string name="password_invalid">Mật khẩu không hợp lệ!</string>
+    <string name="email_require">Yêu cầu nhập Email!</string>
+    <string name="password_require">Yêu cầu nhập mật khẩu!</string>
+    <string name="password_require_length">Chiều dài ngắn nhất mật khẩu 6 kí tự!</string>
     <string-array name="languages">
         <item>Tiếng Việt</item>
         <item>Tiếng Anh</item>
     </string-array>
+
+    <string name="action_login_success">Đăng nhập thành công!</string>
+    <string name="action_login_fail">Đăng nhập thất bại!</string>
+    <!--title-->
+    <string name="title_table_list">Danh Sách Bàn Ăn</string>
+    <string name="title_language_dialog">Ngôn Ngữ</string>
 </resources>

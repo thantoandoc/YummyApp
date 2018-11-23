@@ -69,7 +69,8 @@ public class CheesesFragment extends Fragment {
         mDishArray = new ArrayList<>();
         mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 1);
         mCheesesGrid.setAdapter(mDishAdapter);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        int numberSpanCount = getResources().getInteger(R.integer.number_of_grid_items);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(getActivity(),numberSpanCount );
         mCheesesGrid.setLayoutManager(manager);
 
         database = FirebaseDatabase.getInstance();

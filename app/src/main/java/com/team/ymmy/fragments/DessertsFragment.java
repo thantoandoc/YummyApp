@@ -68,7 +68,8 @@ public class DessertsFragment extends Fragment {
         mDishArray = new ArrayList<>();
         mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 3);
         mDessertRecycleView.setAdapter(mDishAdapter);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        int numberSpanCount = getResources().getInteger(R.integer.number_of_grid_items);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),numberSpanCount );
         mDessertRecycleView.setLayoutManager(mLayoutManager);
 
         database = FirebaseDatabase.getInstance();

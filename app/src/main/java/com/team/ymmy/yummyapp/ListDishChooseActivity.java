@@ -95,7 +95,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
                 if (direction == ItemTouchHelper.LEFT){
                     adapter.removeItem(position);
                     totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
-                    Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , "This dish was removed",Snackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , getResources().getString(R.string.delete_string),Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

@@ -8,7 +8,7 @@
     android:theme="@style/AppTheme.CustomCardView">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_dish">
+        android:layout_height="@dimen/item_category">
         <ImageView
             android:background="@color/black"
             android:scaleType="centerCrop"
@@ -20,7 +20,7 @@
             android:id="@+id/txt_catalog_name"
             android:background="@drawable/border_dish"
             android:textStyle="bold"
-            android:textAllCaps="true"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_name"
             android:layout_alignParentBottom="true"

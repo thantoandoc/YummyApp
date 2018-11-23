@@ -66,7 +66,8 @@ public class SoupsFragment extends Fragment {
         mDishArray = new ArrayList<>();
         mDishAdapter = new DishAdapterRecycler(getActivity(), R.layout.item_dish, mDishArray, 5);
         mSoupGrid.setAdapter(mDishAdapter);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        int numberSpanCount = getResources().getInteger(R.integer.number_of_grid_items);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),numberSpanCount );
         mSoupGrid.setLayoutManager(mLayoutManager);
 
         database = FirebaseDatabase.getInstance();

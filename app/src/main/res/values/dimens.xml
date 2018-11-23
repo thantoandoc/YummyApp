@@ -11,13 +11,16 @@
     <dimen name="text_size_cost">16sp</dimen>
     <dimen name="text_size_discount_choose">8sp</dimen>
     <dimen name="text_address">10sp</dimen>
+    <dimen name="text_name_restaurant">16sp</dimen>
     <dimen name="border_dish">10dp</dimen>
     <dimen name="item_dish">200dp</dimen>
     <dimen name="item_dish_height">250dp</dimen>
     <dimen name="item_dish_choose">128dp</dimen>
     <dimen name="icon_new">64dp</dimen>
     <dimen name="wrapper_image_choose">32dp</dimen>
-
+    <dimen name="wrapper_logo">128dp</dimen>
+    <dimen name="item_category">200dp</dimen>
     <!--Text-->
     <dimen name="text_logo">48sp</dimen>
+
 </resources>

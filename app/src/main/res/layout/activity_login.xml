@@ -21,10 +21,10 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_yummy"
-            android:contentDescription="@string/app_name_icon" />
+            android:layout_width="@dimen/wrapper_logo"
+            android:layout_height="@dimen/wrapper_logo"
+            android:contentDescription="@string/app_name_icon"
+            android:src="@drawable/icon_yummy" />
 
         <TextView
             android:layout_width="match_parent"

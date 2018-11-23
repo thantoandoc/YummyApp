@@ -102,23 +102,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String userName = mUserName.getText().toString().trim();
         String passWord = mPassWord.getText().toString().trim();
         if(userName.isEmpty()) {
-            mUserName.setError("Email is required!");
+            mUserName.setError(getResources().getString(R.string.email_require));
             mUserName.requestFocus();
             return;
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(userName).matches()) {
-            mUserName.setError("Email invalid!");
+            mUserName.setError(getResources().getString(R.string.email_invalid));
             mUserName.requestFocus();
             return;
         }
 
         if(passWord.isEmpty()) {
-            mPassWord.setError("Password is required!");
+            mPassWord.setError(getResources().getString(R.string.password_require));
             mPassWord.requestFocus();
             return;
         }
         if(passWord.length() < 6) {
-            mPassWord.setError("Minimum length of password should be 6!");
+            mPassWord.setError(getResources().getString(R.string.password_require_length));
             mPassWord.requestFocus();
             return;
         }
@@ -134,13 +134,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Toast.makeText(LoginActivity.this, "Login success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.action_login_success), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, TableActivity.class);
                     progressBar.setVisibility(View.INVISIBLE);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Login isn't success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.action_login_fail), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
             }
