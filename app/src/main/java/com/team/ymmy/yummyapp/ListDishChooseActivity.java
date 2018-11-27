@@ -206,7 +206,7 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_submit:{
-                if(CatalogActivity.mDSMonAn.size() > 0 || !isEquals(arrayList) ){
+                if(CatalogActivity.mDSMonAn.size() > 0 || isEquals(arrayList) ){
                     pushDataToFirebase();
                     finish();
                     return;

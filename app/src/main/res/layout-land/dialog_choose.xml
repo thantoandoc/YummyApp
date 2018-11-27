@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_round">
+    <RelativeLayout
+        android:layout_marginTop="@dimen/activity_margin"
+        android:padding="@dimen/activity_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="@dimen/item_dish_choose"
+            android:layout_height="wrap_content"
+            android:id="@+id/image"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+
+
+            <ImageView
+                android:id="@+id/img_dish_dialog"
+                android:layout_width="@dimen/item_dish_choose"
+                android:layout_height="@dimen/item_dish_choose"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/activity_padding"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/img_new_dialog"
+                android:layout_width="@dimen/icon_new"
+                android:layout_height="@dimen/icon_new"
+                android:src="@drawable/ic_new"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/img_sale_off_dialog"
+                android:layout_width="@dimen/icon_new"
+                android:layout_height="@dimen/icon_new"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_sale_off"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/txt_discount_dialog"
+                android:layout_width="@dimen/icon_new"
+                android:layout_height="@dimen/icon_new"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/image"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_dish_name_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_name"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="invisible"
+                    android:padding="@dimen/activity_padding"
+                    android:background="@drawable/strike_text_blue"
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/txt_dish_price_origin_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giá"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginEnd="@dimen/activity_margin"
+                    android:layout_toStartOf="@id/txt_dish_price_dialog"
+                    android:layout_toLeftOf="@id/txt_dish_price_dialog"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_size_discount_choose"
+                    />
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:text="Giá"
+                    android:id="@+id/txt_dish_price_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_cost"
+
+                    />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_sub"
+                        android:layout_width="@dimen/btn_height"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:background="@drawable/round_outline"
+                        android:text="@string/action_sub"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/text_size_name"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/amounts"
+                        android:textSize="@dimen/text_size_name"
+                        android:textColor="@color/colorPrimary"
+                        android:text="1"
+                        android:gravity="center"
+                        android:layout_width="@dimen/btn_height"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:id="@+id/btn_add"
+                        android:layout_width="@dimen/btn_height"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:background="@drawable/round_outline"
+                        android:text="@string/action_add"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/text_size_name"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_margin="@dimen/activity_margin"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:background="@drawable/btn_border_green"
+            android:text="@string/action_ok"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_name"
+            />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_margin="@dimen/activity_margin"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:background="@drawable/btn_border_red"
+            android:textColor="@color/white"
+            android:text="@string/action_cancel"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_name"/>
+
+
+    </LinearLayout>
+</LinearLayout>
