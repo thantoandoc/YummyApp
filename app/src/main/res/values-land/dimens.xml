@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="wrapper_logo">128dp</dimen>
+    <dimen name="wrapper">280dp</dimen>
+    <dimen name="layout_margin">16dp</dimen>
+</resources>

@@ -1,11 +1,11 @@
 package com.team.ymmy.yummyapp;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,9 +24,6 @@ import com.team.ymmy.fragments.ColdStarterFragment;
 import com.team.ymmy.fragments.DessertsFragment;
 import com.team.ymmy.fragments.MainCoursesFragment;
 import com.team.ymmy.fragments.SoupsFragment;
-import com.team.ymmy.model.DishModel;
-
-import java.util.ArrayList;
 
 public class SideMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +31,16 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
+    private int fragmentNow = 0;
+    private static final String FRAGMENT_NOW_FILE = "FRAGMENT_NOW_FILE";
+    private static final String FRAGMENT_NOW = "FRAGMENT_NOW";
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        SharedPreferences sharedPreferences = getSharedPreferences(FRAGMENT_NOW_FILE, MODE_PRIVATE);
+        fragmentNow = sharedPreferences.getInt(FRAGMENT_NOW, R.id.action_cold_starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,33 +78,34 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
 
     private void setDefaultItem() {
         Intent intent = getIntent();
-        int ID = intent.getIntExtra(Constant.POSITION_CATEGORY, R.id.action_cold_starter);
+        int ID = intent.getIntExtra(Constant.POSITION_CATEGORY, fragmentNow);
+        System.out.println(fragmentNow);
         mNavigationView.setCheckedItem(ID);
         Fragment fragment;
         switch (ID){
             case R.id.action_cold_starter:
                 fragment = new ColdStarterFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, ID);
                 break;
             case R.id.action_appetizers:
                 fragment = new AppetizersFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, ID);
                 break;
             case R.id.action_soup:
                 fragment = new SoupsFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, ID);
                 break;
             case R.id.action_main_courses:
                 fragment = new MainCoursesFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, ID);
                 break;
             case R.id.action_cheese_biscuits:
                 fragment = new CheesesFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, ID);
                 break;
             case R.id.action_desserts:
                 fragment = new DessertsFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, ID);
                 break;
         }
     }
@@ -132,48 +140,65 @@ public class SideMenu extends AppCompatActivity implements NavigationView.OnNavi
         Fragment fragment;
         switch (item.getItemId()) {
             case R.id.action_cold_starter : {
+                fragmentNow = item.getItemId();
+                System.out.println(fragmentNow);
                 fragment = new ColdStarterFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, item.getItemId());
                 mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_appetizers : {
+                fragmentNow = item.getItemId();
+                System.out.println(fragmentNow);
                 fragment = new AppetizersFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, item.getItemId());
                 mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_soup : {
+                fragmentNow = item.getItemId();
+                System.out.println(fragmentNow);
                 fragment = new SoupsFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, item.getItemId());
                 mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_main_courses : {
+                fragmentNow = item.getItemId();
+                System.out.println(fragmentNow);
                 fragment = new MainCoursesFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, item.getItemId());
                 mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_cheese_biscuits : {
+                fragmentNow = item.getItemId();
+                System.out.println(fragmentNow);
                 fragment = new CheesesFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, item.getItemId());
                 mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
             case R.id.action_desserts : {
+                fragmentNow = item.getItemId();
+                System.out.println(fragmentNow);
                 fragment = new DessertsFragment();
-                changeFragment(fragment);
+                changeFragment(fragment, item.getItemId());
                 mDrawerLayout.closeDrawer(Gravity.END);
                 return true;
             }
         }
         return false;
     }
-    public void changeFragment(Fragment fragment){
-        FragmentTransaction mFragmentTransaction = getFragmentManager().beginTransaction();
+    public void changeFragment(Fragment fragment, int fragmentNow){
+        FragmentTransaction mFragmentTransaction = getSupportFragmentManager().beginTransaction();
         mFragmentTransaction.replace(R.id.content_frame, fragment);
         mFragmentTransaction.commit();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(FRAGMENT_NOW_FILE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(FRAGMENT_NOW, fragmentNow);
+        editor.commit();
     }
 
 

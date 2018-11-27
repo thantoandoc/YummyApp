@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_login"
+    android:background="@drawable/splash_screen"
+    tools:context="com.team.ymmy.yummyapp.MainActivity">
+
+    <LinearLayout
+        android:layout_width="@dimen/wrapper"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/wrapper_logo"
+            android:layout_height="@dimen/wrapper_logo"
+            android:contentDescription="@string/app_name_icon"
+            android:src="@drawable/icon_yummy" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name_icon"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_logo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_width="@dimen/wrapper"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:background="@drawable/wrapper_input"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_icon"
+                android:layout_marginRight="@dimen/margin_icon"
+                android:contentDescription="@string/text_username"
+                android:padding="@dimen/activity_padding"
+                android:src="@drawable/user" />
+
+            <EditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_padding"
+                android:layout_marginRight="@dimen/activity_padding"
+                android:hint="@string/text_username"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/activity_padding"
+            android:background="@drawable/wrapper_input"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_icon"
+                android:layout_marginRight="@dimen/margin_icon"
+                android:contentDescription="@string/app_name_icon"
+                android:padding="@dimen/activity_padding"
+                android:src="@drawable/lock" />
+
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_padding"
+                android:layout_marginRight="@dimen/activity_padding"
+                android:hint="@string/text_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:background="@drawable/border_button"
+            android:text="@string/text_login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/wrapper"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_padding">
+
+            <CheckBox
+                android:id="@+id/chk_remember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/activity_padding"
+                android:text="@string/forgot_password"
+                android:textColor="@color/white"
+                tools:ignore="RelativeOverlap" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar_login"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

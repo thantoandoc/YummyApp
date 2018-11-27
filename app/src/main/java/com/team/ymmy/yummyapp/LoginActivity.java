@@ -2,6 +2,8 @@ package com.team.ymmy.yummyapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.os.PatternMatcher;
 import android.preference.PreferenceManager;
@@ -12,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -31,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.team.ymmy.interfaces.InternetConnection;
 
+import java.util.Locale;
 import java.util.TimerTask;
 
 
@@ -49,18 +53,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String PASSWORD = "PASSWORD";
     private static final String CHECKBOX_STATE = "CHECKBOX_STATE";
 
+    private final static String MY_LANGUAGE = "MY_LANGUAGE";
+    private final static String MY_LANGUAGE_FILE = "MY_LANGUAGE_FILE";
+    private SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onStart() {
         super.onStart();
+        System.out.println("onStart");
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Intent intent = new Intent(LoginActivity.this, TableActivity.class);
             startActivity(intent);
             finish();
         }
+        sharedPreferences = getSharedPreferences(MY_LANGUAGE_FILE, MODE_PRIVATE);
+        String language = sharedPreferences.getString(MY_LANGUAGE, "en");
+        changeLanguage(language);
+    }
+    private void changeLanguage(String language) {
+        System.out.println(language);
+        changeLanguageOnSystem(language);
+        mapViews();
+        initReferences();
+        handleEvents();
     }
 
+    private void changeLanguageOnSystem(String language) {
+        Locale locale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration configuration = res.getConfiguration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, dm);
+    }
     private void showSnack() {
         Snackbar snackbar = Snackbar.make( findViewById(R.id.layout_login) , R.string.nE, Snackbar.LENGTH_SHORT);
         snackbar.getView().setBackgroundResource(R.color.color_btn_choose);

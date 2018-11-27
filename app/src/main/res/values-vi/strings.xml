@@ -31,6 +31,7 @@
     <string name="nE">Internet đã bị ngắt</string>
     <string name="hE">Đã kết nối Internet</string>
     <string name="action_delete">Xóa</string>
+    <string name="action_undo">Hoàn tác</string>
     <string name="delete_string">Món ăn đã được xóa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

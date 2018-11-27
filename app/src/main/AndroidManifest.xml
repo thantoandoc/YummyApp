@@ -23,12 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".TableActivity" />
-        <activity android:name=".CatalogActivity" />
-        <activity android:name=".SideMenu" />
-        <activity android:name=".ListDishChooseActivity" />
-        <activity android:name=".CheckoutActivity"/>
+        <activity android:name=".LoginActivity"
+            android:configChanges="locale|orientation"/>
+        <activity android:name=".TableActivity"
+            android:configChanges="locale|orientation"/>
+        <activity android:name=".CatalogActivity"
+            android:configChanges="locale|orientation"/>
+        <activity android:name=".SideMenu"
+            android:configChanges="locale|orientation"/>
+        <activity android:name=".ListDishChooseActivity"
+            android:configChanges="locale|orientation"/>
+        <activity android:name=".CheckoutActivity"
+            android:configChanges="locale|orientation"/>
     </application>
 
 </manifest>

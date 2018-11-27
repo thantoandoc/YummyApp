@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,7 +44,9 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
     private Button btn_submit;
     private TextView totalPriceOrder;
     private DishChooseAdapter adapter;
+
     private ArrayList<DishChooseModel> arrayList;
+    private long backUpTotal = 0L, backUpSize = 0L;
     private int table_order;
 
     private DatabaseReference database;
@@ -67,9 +70,10 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
         mToolbar = findViewById(R.id.toolbar_list_choose);
         mRecyclerDish = findViewById(R.id.recycler_dish_choose);
         arrayList = new ArrayList<>();
+
         btn_submit = findViewById(R.id.btn_submit);
         totalPriceOrder = findViewById(R.id.totalPriceOrder);
-        adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList);
+        adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList, totalPriceOrder);
         mRecyclerDish.setAdapter(adapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerDish.setLayoutManager(mLayoutManager);
@@ -81,7 +85,9 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
 }
 
     private void initSwipe() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT  ) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ) {
+
+
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -91,17 +97,14 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 final int position = viewHolder.getAdapterPosition();
                 final DishChooseModel deleteItem= adapter.getItem(position);
-
                 if (direction == ItemTouchHelper.LEFT){
                     adapter.removeItem(position);
-                    totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
-                    Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , getResources().getString(R.string.delete_string),Snackbar.LENGTH_LONG);
-                    snackbar.setAction("UNDO", new View.OnClickListener() {
+                    Snackbar snackbar = Snackbar.make( findViewById(android.R.id.content) , getResources().getString(R.string.delete_string),Snackbar.LENGTH_SHORT);
+                    snackbar.setAction(getResources().getString(R.string.action_undo), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             adapter.restoreItem(deleteItem, position);
                             mRecyclerDish.scrollToPosition(position);
-                            totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
                         }
                     });
                     snackbar.setActionTextColor(Color.GREEN);
@@ -120,15 +123,10 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
                 float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
                 return px;
             }
+
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
-//                final View foregroundView = ((DishChooseAdapter.ViewHolder) viewHolder).viewForeground;
-//                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-//                    foregroundView.setTranslationX(dX);
-//                }else {
-//                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-//                }
                 View itemView = viewHolder.itemView;
                 Paint paint = new Paint();
                 Bitmap icon;
@@ -180,7 +178,6 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
 
     private void getDatas() {
         database.child("DishChoose").child("ban_" +(table_order  + 1)).addValueEventListener(this);
-
     }
 
 
@@ -209,20 +206,47 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_submit:{
-                if(CatalogActivity.mDSMonAn.size() > 0){
+                if(CatalogActivity.mDSMonAn.size() > 0 || !isEquals(arrayList) ){
                     pushDataToFirebase();
                     finish();
+                    return;
                 }
-                return;
+
             }
         }
     }
 
+    private boolean isEquals(ArrayList<DishChooseModel> arrayList) {
+        return (backUpSize != arrayList.size() || backUpTotal != getTotalPrice(arrayList));
+    }
+    private int getTotalPrice(ArrayList<DishChooseModel> mArrayDish) {
+        int total = 0;
+        for (int i = 0; i < mArrayDish.size(); i++){
+            if(mArrayDish.get(i).getDiscount() > 0){
+                total += ((int) (mArrayDish.get(i).getPrice() -  mArrayDish.get(i).getPrice() *  mArrayDish.get(i).getDiscount() / 100)) * mArrayDish.get(i).getCounter();
+            }else{
+                total += mArrayDish.get(i).getPrice() * mArrayDish.get(i).getCounter();
+            }
+        }
+        return total;
+    }
+
     private void pushDataToFirebase() {
         database.child("danhsachbanan").child("ban_" + (table_order + 1)).child("status").setValue(true);
-        for (int i = 0; i < CatalogActivity.mDSMonAn.size(); i++){
-            database.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).push().setValue(CatalogActivity.mDSMonAn.get(i));
-        }
+
+        database.child(Constant.DISHCHOOSE).child( "ban_" + (table_order + 1) ).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if(databaseError == null){
+                    for (int i = 0; i < arrayList.size(); i++){
+                        System.out.println("AAA");
+                        database.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).push().setValue(arrayList.get(i));
+                    }
+                }
+            }
+        });
+
+
         CatalogActivity.mDSMonAn.clear();
     }
 
@@ -239,10 +263,12 @@ public class ListDishChooseActivity extends AppCompatActivity implements View.On
                 System.out.println(ds.getKey());
                 arrayList.add(dish);
             }
-
+            backUpTotal = getTotalPrice(arrayList);
+            backUpSize = arrayList.size();
             adapter.notifyDataSetChanged();
         }
         totalPriceOrder.setText(String.valueOf(adapter.getTotalPrice()));
+
     }
 
     @Override

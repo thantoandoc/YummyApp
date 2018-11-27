@@ -1,7 +1,7 @@
 package com.team.ymmy.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +22,7 @@ import com.team.ymmy.yummyapp.R;
 
 import java.util.ArrayList;
 
-public class ColdStarterFragment extends Fragment{
+public class ColdStarterFragment extends Fragment {
 
     private RecyclerView mColdStartGrid;
     private ArrayList mDishArray;

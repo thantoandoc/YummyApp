@@ -63,7 +63,7 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
         totalPrice = findViewById(R.id.totalPrice);
         arrayList = new ArrayList<>();
         mRecyclerDish = findViewById(R.id.recycler_dish_for_checkout);
-        adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList);
+        adapter = new DishChooseAdapter(this, R.layout.item_dish_choosen, arrayList, totalPrice);
         checkoutAdataper = new CheckoutAdataper(this, R.layout.item_dish_checkout, arrayList);
 
         mRecyclerDish.setAdapter(adapter);
@@ -135,8 +135,9 @@ public class CheckoutActivity extends AppCompatActivity implements ValueEventLis
         switch (v.getId()){
             case R.id.btn_checkout:
                 databaseReference.child("danhsachbanan").child("ban_" + (table_order + 1)).child("status").setValue(false);
+                long currentTime =  System.currentTimeMillis();
                 for (int i = 0; i < arrayList.size(); i++){
-                    databaseReference.child(Constant.GET_BILL).child("ban_" + (table_order + 1) +"_"+ System.currentTimeMillis()).push().setValue(arrayList.get(i));
+                    databaseReference.child(Constant.GET_BILL).child("ban_" + (table_order + 1) +"_" + currentTime).push().setValue(arrayList.get(i));
                 }
                 databaseReference.child(Constant.DISHCHOOSE).child("ban_" + (table_order + 1) ).removeValue(new DatabaseReference.CompletionListener() {
                     @Override

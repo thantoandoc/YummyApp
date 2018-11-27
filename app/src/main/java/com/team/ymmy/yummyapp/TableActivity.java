@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -43,6 +44,7 @@ public class TableActivity extends AppCompatActivity {
     private DatabaseReference mTableListRef;
     private static String language = "en";
     private final static String MY_LANGUAGE = "MY_LANGUAGE";
+    private final static String MY_LANGUAGE_FILE = "MY_LANGUAGE_FILE";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -50,7 +52,7 @@ public class TableActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        sharedPreferences = getSharedPreferences(MY_LANGUAGE, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(MY_LANGUAGE_FILE, MODE_PRIVATE);
         language = sharedPreferences.getString(MY_LANGUAGE, "en");
         changeLanguage(language);
     }
@@ -132,7 +134,7 @@ public class TableActivity extends AppCompatActivity {
 
 
     private void changeLanguage(String language) {
-        sharedPreferences = getSharedPreferences(MY_LANGUAGE, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(MY_LANGUAGE_FILE, MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.putString(MY_LANGUAGE, language);
         editor.commit();
@@ -144,10 +146,10 @@ public class TableActivity extends AppCompatActivity {
 
     private void changeLanguageOnSystem(String language) {
         Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Configuration configuration = new Configuration();
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
         configuration.locale = locale;
-        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+        resources.updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 
     private void setControls() {

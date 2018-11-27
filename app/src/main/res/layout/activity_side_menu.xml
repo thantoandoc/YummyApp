@@ -20,12 +20,12 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
         </android.support.v7.widget.Toolbar>
 
-        <fragment
-            android:name="com.team.ymmy.fragments.ColdStarterFragment"
+        <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_dish"/>
+            android:layout_height="match_parent" >
+            <include layout="@layout/fragment_dish"/>
+        </FrameLayout>
     </LinearLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

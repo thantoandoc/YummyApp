@@ -1,8 +1,8 @@
 package com.team.ymmy.fragments;
 
-
-import android.app.Fragment;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -73,5 +73,6 @@ public class SoupsFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mSoupRef = database.getReference().child("DanhSachMonAn").child(Constant.TYPE[5]);
     }
+
 
 }
